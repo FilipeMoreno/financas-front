@@ -88,12 +88,12 @@ export default function Header(context, { online }) {
                     className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 hover:bg-purple-800 focus:bg-purple-800  dark:border-black"
                     aria-current="page"
                   >
-                    <div className="flex flex-row items-center">INÍCIO</div>
+                    <div className="flex flex-row items-center">RESUMO</div>
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/transacoes">
+                <Link href="/lancamentos">
                   <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-black dark:hover:bg-purple-800 focus:bg-purple-800 dark:border-black">
                     <div className="flex flex-row items-center">
                       LANÇAMENTOS
@@ -102,9 +102,30 @@ export default function Header(context, { online }) {
                 </Link>
               </li>
               <li>
+                <Link href="/contas">
+                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-black dark:hover:bg-purple-800 focus:bg-purple-800 dark:border-black">
+                    <div className="flex flex-row items-center">CONTAS</div>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cartoes">
+                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-black dark:hover:bg-purple-800 focus:bg-purple-800 dark:border-black">
+                    <div className="flex flex-row items-center">CARTÕES</div>
+                  </a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/relatorios">
                   <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-purple-800 focus:bg-purple-800 dark:hover:text-white dark:border-black">
                     <div className="flex flex-row items-center">RELATÓRIOS</div>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/orcamento">
+                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-purple-800 focus:bg-purple-800 dark:hover:text-white dark:border-black">
+                    <div className="flex flex-row items-center">ORÇAMENTOS</div>
                   </a>
                 </Link>
               </li>
