@@ -54,6 +54,8 @@ module.exports = {
         dark4: '#303030',
         dark5: '#424242',
         roxo: '#8b5cf6',
+        expense: '#e74c54',
+        income: '#6abe6d',
         colorPrimary: '#7e3af2',
         colorSecondary: '#db004c',
         colorTerciary: '#da3114',

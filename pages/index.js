@@ -13,6 +13,7 @@ import Header from '../components/Header'
 import { FaPlus } from 'react-icons/fa'
 import { AiOutlineFileSearch } from 'react-icons/ai'
 import DetailsComponent from '../components/Index/DetailsComponent'
+import NewTransactionComponent from '../components/Index/NewTransactionComponent'
 
 export default function Home() {
   const router = useRouter()
@@ -44,9 +45,7 @@ export default function Home() {
             <DetailsComponent />
           </div>
           <div>
-            <button className="flex flex-row items-center bg-roxo md:p-4 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm">
-              <FaPlus className="mr-1" /> Nova transação
-            </button>
+            <NewTransactionComponent />
           </div>
         </div>
         <div className="grid overflow-hidden md:grid-cols-2 sm:grid-cols-1 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row md:mx-12 sm:mx-6">
