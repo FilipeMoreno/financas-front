@@ -1,6 +1,11 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { AiOutlineEye } from 'react-icons/ai'
+import {
+  AiFillEye,
+  AiFillEyeInvisible,
+  AiOutlineEye,
+  AiOutlineEyeInvisible
+} from 'react-icons/ai'
 
 import AccountsComponent from '../components/Accounts'
 import BillsToPayComponent from '../components/Bills/BillsToPay'
@@ -32,7 +37,9 @@ export default function Home() {
             <div className="flex flex-row items-center text-xl ">
               <p>Saldo total</p>
               <a onClick={() => handleHideValue()}>
-                <AiOutlineEye className="ml-4 cursor-pointer" />
+                {(hideValue && (
+                  <AiFillEye className="ml-4 cursor-pointer" />
+                )) || <AiFillEyeInvisible className="ml-4 cursor-pointer" />}
               </a>
             </div>
             {(!hideValue && (
