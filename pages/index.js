@@ -48,20 +48,20 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div class="grid overflow-hidden grid-cols-2 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row mx-12">
-          <div class="box">
+        <div className="grid overflow-hidden grid-cols-2 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row mx-12">
+          <div className="box">
             <AccountsComponent hideValue={hideValue} />
           </div>
-          <div class="box row-span-2">
+          <div className="box row-span-2">
             <BillsToReceiverComponent hideValue={hideValue} />
           </div>
-          <div class="box">
+          <div className="box">
             <CardComponent />
           </div>
-          <div class="box">
+          <div className="box">
             <TransactionsComponent hideValue={hideValue} />
           </div>
-          <div class="box row-span-2">
+          <div className="box row-span-2">
             <BillsToPayComponent hideValue={hideValue} />
           </div>
         </div>

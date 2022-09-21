@@ -18,7 +18,7 @@ export default function BillsComponent({ type, hideValue }) {
               <h1 className="text-2xl font-medium">Almoço</h1>
               <p className="text-sm font-thin text-gray-300">
                 Alimentação{' '}
-                <div class="badge badge-primary text-xs">Restaurante</div>
+                <div className="badge badge-primary text-xs">Restaurante</div>
               </p>
               <p className="text-sm font-thin text-gray-300">Nubank</p>
             </div>

@@ -11,7 +11,7 @@ export default function IncomeExpenseTransactionComponent({ hideValue, type }) {
           <div className="flex flex-col">
             <h1 className="text-2xl font-medium">Salário</h1>
             <p className="text-sm font-thin text-gray-300">
-              Salário <div class="badge badge-primary text-xs">Salário</div>
+              Salário <div className="badge badge-primary text-xs">Salário</div>
             </p>
             <p className="text-sm font-thin text-gray-300">Nubank</p>
           </div>

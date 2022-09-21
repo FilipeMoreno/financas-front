@@ -112,7 +112,7 @@ export default function Header(context, { online }) {
           </div>
 
           <div className="dropdown dropdown-end">
-            <label tabindex="0" className="cursor-pointer">
+            <label tabIndex="0" className="cursor-pointer">
               <a className="block py-2 pr-4 pl-3 text-white font-bold rounded-lg md:bg-transparent md:text-gray-300 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 hover:bg-purple-800 focus:bg-purple-800 dark:hover:text-white dark:border-black">
                 <div className="flex flex-row items-center">
                   <div className="flex items-center mr-2 text-gray-300"></div>
@@ -121,8 +121,8 @@ export default function Header(context, { online }) {
               </a>
             </label>
             <ul
-              tabindex="0"
-              class="dropdown-content menu p-2 shadow bg-dark3 rounded-tr-none rounded-tl-lg rounded-b-lg w-52"
+              tabIndex="0"
+              className="dropdown-content menu p-2 shadow bg-dark3 rounded-tr-none rounded-tl-lg rounded-b-lg w-52"
             >
               <Link href="#">
                 <li className="flex flex-row items-center hover:text-roxo cursor-pointer p-2">
