@@ -27,7 +27,7 @@ export default function Home() {
       <Header />
       <title>Finanças</title>
       <div>
-        <div className="flex bg-dark2 h-32 rounded-b-3xl justify-around items-center mb-8">
+        <div className="flex md:flex-row sm:flex-col bg-dark2 md:h-32 sm:h-48 rounded-b-3xl justify-around items-center mb-8">
           <div className="flex flex-col justify-center mx-2">
             <div className="flex flex-row items-center text-xl ">
               <p>Saldo total</p>
@@ -43,12 +43,12 @@ export default function Home() {
             </a>
           </div>
           <div>
-            <button className="flex flex-row items-center bg-colorSecondary p-4 rounded-lg font-bold text-md">
+            <button className="flex flex-row items-center bg-colorSecondary md:p-4 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm">
               <FaPlus className="mr-1" /> Nova transação
             </button>
           </div>
         </div>
-        <div className="grid overflow-hidden grid-cols-2 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row mx-12">
+        <div className="grid overflow-hidden md:grid-cols-2 sm:grid-cols-1 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row md:mx-12 sm:mx-6">
           <div className="box">
             <AccountsComponent hideValue={hideValue} />
           </div>
