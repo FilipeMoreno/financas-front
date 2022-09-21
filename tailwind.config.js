@@ -55,7 +55,7 @@ module.exports = {
         dark5: '#424242',
         roxo: '#8b5cf6',
         colorPrimary: '#7e3af2',
-        colorSecondary: '#da145a',
+        colorSecondary: '#db004c',
         colorTerciary: '#da3114',
         colorQuartenary: '#da14bd',
         otherColor: '#dd2476',

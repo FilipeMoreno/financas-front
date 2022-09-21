@@ -12,11 +12,12 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { FaPlus } from 'react-icons/fa'
 import { AiOutlineFileSearch } from 'react-icons/ai'
+import DetailsComponent from '../components/Index/DetailsComponent'
 
 export default function Home() {
   const router = useRouter()
 
-  const [hideValue, setHideValue] = useState(true)
+  const [hideValue, setHideValue] = useState(false)
 
   function handleHideValue() {
     setHideValue(!hideValue)
@@ -40,12 +41,10 @@ export default function Home() {
             {(!hideValue && (
               <h1 className="font-bold text-4xl">R$ 100,00</h1>
             )) || <h1 className="font-bold text-4xl">🙈🙈🙈</h1>}
-            <a className="flex items-center font-bold text-lg cursor-pointer hover:bg-dark-4 mt-1">
-              <AiOutlineFileSearch className="mr-1" /> Detalhes
-            </a>
+            <DetailsComponent />
           </div>
           <div>
-            <button className="flex flex-row items-center bg-colorSecondary md:p-4 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm">
+            <button className="flex flex-row items-center bg-roxo md:p-4 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm">
               <FaPlus className="mr-1" /> Nova transação
             </button>
           </div>
