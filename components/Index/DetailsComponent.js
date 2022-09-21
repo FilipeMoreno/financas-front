@@ -43,7 +43,7 @@ export default function DetailsComponent() {
         onRequestClose={closeModal1}
         style={customStyles}
       >
-        <div className="lg:w-[400px] sm:w-auto overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
+        <div className="lg:w-[400px] sm:w-[300px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
           <div className="text-gray-300 flex items-center justify-between">
             <h1 className="text-2xl font-bold text-textPrimary">Detalhes</h1>
             <h1
@@ -57,31 +57,41 @@ export default function DetailsComponent() {
           <div className="my-4">
             <div className="flex flex-row justify-between">
               <div>
-                <h1 className="font-bold text-xl">(+) Receitas</h1>
-                <p className="text-[#7a7a7a] font-bold">1 transação</p>
+                <h1 className="font-bold lg:text-xl sm:text-md">
+                  (+) Receitas
+                </h1>
+                <p className="text-[#7a7a7a] font-bold lg:text-base sm:text-sm">
+                  1 transação
+                </p>
               </div>
               <div>
-                <h1 className="font-bold text-xl ">R$ 100,00</h1>
-              </div>
-            </div>
-            <hr className="border-dark5 my-3" />
-            <div className="flex flex-row justify-between">
-              <div>
-                <h1 className="font-bold text-xl">(-) Despesas</h1>
-                <p className="text-[#7a7a7a] font-bold">1 transação</p>
-              </div>
-              <div>
-                <h1 className="font-bold text-xl">- R$ 100,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">R$ 100,00</h1>
               </div>
             </div>
             <hr className="border-dark5 my-3" />
             <div className="flex flex-row justify-between">
               <div>
-                <h1 className="font-bold text-xl">(=) Total</h1>
-                <p className="text-[#7a7a7a] font-bold">1 transação</p>
+                <h1 className="font-bold lg:text-xl sm:text-md">
+                  (-) Despesas
+                </h1>
+                <p className="text-[#7a7a7a] font-bold lg:text-base sm:text-sm">
+                  1 transação
+                </p>
               </div>
               <div>
-                <h1 className="font-bold text-xl">R$ 00,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">- R$ 100,00</h1>
+              </div>
+            </div>
+            <hr className="border-dark5 my-3" />
+            <div className="flex flex-row justify-between">
+              <div>
+                <h1 className="font-bold lg:text-xl sm:text-md">(=) Total</h1>
+                <p className="text-[#7a7a7a] font-bold lg:text-base sm:text-sm">
+                  1 transação
+                </p>
+              </div>
+              <div>
+                <h1 className="font-bold lg:text-xl sm:text-md">R$ 00,00</h1>
               </div>
             </div>
             <hr className="border-dark5 my-3" />
