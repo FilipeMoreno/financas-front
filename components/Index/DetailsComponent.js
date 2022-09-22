@@ -65,9 +65,15 @@ export default function DetailsComponent() {
                 </p>
               </div>
               <div>
-                <h1 className="font-bold lg:text-xl sm:text-md">R$ 100,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">R$ 320,00</h1>
               </div>
             </div>
+            <progress
+              className="progress progress-success w-full bg-dark"
+              value="320"
+              max="561"
+            ></progress>
+            <p className="text-xs text-[#7a7a7a]">R$ 320,00 de R$ 561,00</p>
             <hr className="border-dark5 my-3" />
             <div className="flex flex-row justify-between">
               <div>
@@ -82,6 +88,13 @@ export default function DetailsComponent() {
                 <h1 className="font-bold lg:text-xl sm:text-md">- R$ 100,00</h1>
               </div>
             </div>
+            <progress
+              className="progress progress-error w-full bg-dark"
+              value="100"
+              max="561"
+            ></progress>
+            <p className="text-xs text-[#7a7a7a]">R$ 100,00 de R$ 561,00</p>
+
             <hr className="border-dark5 my-3" />
             <div className="flex flex-row justify-between">
               <div>
@@ -91,7 +104,7 @@ export default function DetailsComponent() {
                 </p>
               </div>
               <div>
-                <h1 className="font-bold lg:text-xl sm:text-md">R$ 00,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">R$ 561,00</h1>
               </div>
             </div>
             <hr className="border-dark5 my-3" />

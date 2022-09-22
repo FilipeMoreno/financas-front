@@ -5,11 +5,12 @@ export default function CardComponent() {
         <p className="font-bold p-4">Cartões de créditos</p>
         <div className="flex flex-row items-center justify-between rounded-lg mx-4">
           <div className="flex items-center justify-center">
-            <div className="flex items-center justify-center rounded-full bg-[#820AD1] w-[50px] h-[50px] mr-4">
+            <div className="flex items-center justify-center w-[50px] h-[50px] mr-4">
               <img
-                src="https://customers.twilio.com/wp-content/uploads/2022/03/nubank_logo.png"
+                src="https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png"
                 alt=""
-                width={30}
+                width="100%"
+                className="rounded-full"
               />
             </div>
             <div className="flex flex-col">
@@ -23,12 +24,12 @@ export default function CardComponent() {
             Ver fatura
           </button>
         </div>
-        <div className="flex flex-row">
-          <div>
+        <div className="flex flex-row p-4 mx-12">
+          <div className="mx-4">
             <h1>Disponível</h1>
             <p>R$ 100,00</p>
           </div>
-          <div>
+          <div className="mx-4">
             <h1>Fatura</h1>
             <p>R$ 100,00</p>
           </div>
