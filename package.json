@@ -50,6 +50,7 @@
     "react-popper": "^2.2.5",
     "react-router-dom": "^6.2.1",
     "react-scroll-up-button": "^1.6.4",
+    "react-select": "^5.4.0",
     "react-switch": "^6.0.0",
     "react-table": "^7.7.0",
     "react-toast-notifications": "^2.5.1",

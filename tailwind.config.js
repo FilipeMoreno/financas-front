@@ -56,6 +56,7 @@ module.exports = {
         roxo: '#8b5cf6',
         expense: '#e74c54',
         income: '#6abe6d',
+        transference: '#e6b400',
         colorPrimary: '#7e3af2',
         colorSecondary: '#db004c',
         colorTerciary: '#da3114',

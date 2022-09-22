@@ -19,16 +19,9 @@ export default function CardComponent() {
               </p>
             </div>
           </div>
-        </div>
-        <div>
-          <div className="flex flex-row justify-between">
-            <p>Fechamento da fatura</p>
-            <p>01/JAN</p>
-          </div>
-          <div className="flex flex-row justify-between">
-            <p>Vencimento da fatura</p>
-            <p>01/JAN</p>
-          </div>
+          <button className="bg-roxo md:p-3 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm">
+            Ver fatura
+          </button>
         </div>
         <div className="flex flex-row">
           <div>

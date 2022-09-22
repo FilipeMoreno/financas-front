@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { AiOutlineFileSearch } from 'react-icons/'
+import { BiTransfer } from 'react-icons/bi'
+
 import { BsCheck } from 'react-icons/bs'
-import { FaMinus, FaPlus, FaClock, FaRegClock, FaCheck } from 'react-icons/fa'
+import { GiReceiveMoney, GiPayMoney } from 'react-icons/gi'
+import { FaMinus, FaPlus, FaRegClock } from 'react-icons/fa'
 
 import ReactModal from 'react-modal'
 
@@ -65,14 +67,20 @@ export default function NewTransactionComponent() {
         >
           <li>
             <a onClick={openModalIncome}>
-              <FaPlus className="mr-2 text-income" />
+              <GiReceiveMoney className="mr-2 text-income" />
               Nova receita
             </a>
           </li>
           <li>
             <a onClick={openModalExpense}>
-              <FaMinus className="mr-2 text-expense" />
+              <GiPayMoney className="mr-2 text-expense" />
               Nova despesa
+            </a>
+          </li>
+          <li>
+            <a>
+              <BiTransfer className="mr-2 text-transference" />
+              Transferência
             </a>
           </li>
         </ul>
@@ -97,39 +105,39 @@ export default function NewTransactionComponent() {
           </div>
           <hr className="border-dark5 my-3" />
           <div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="text"
                 id="description"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Descrição
               </label>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="text"
                 id="amount"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Valor
               </label>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="date"
                 id="vencimento"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Vencimento
               </label>
             </div>
@@ -166,24 +174,24 @@ export default function NewTransactionComponent() {
                 )}
               </div>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <select
                 id="category"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
                 required
               >
                 <option value="1">Alimentação</option>
                 <option value="1">Carro</option>
                 <option value="1">Computador</option>
               </select>
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Categoria
               </label>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <select
                 id="account"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
                 required
               >
                 <option value="1">Minha Carteira</option>
@@ -199,7 +207,7 @@ export default function NewTransactionComponent() {
                 </option>
                 <option value="1">Next</option>
               </select>
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Conta
               </label>
             </div>
@@ -214,15 +222,15 @@ export default function NewTransactionComponent() {
               </div>
             )}
             {showMoreExpense && (
-              <div class="relative mb-6">
+              <div className="relative mb-6">
                 <input
                   type="text"
                   id="tags"
-                  class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-expense focus:outline-none focus:ring-0 peer"
                   placeholder=" "
                   required
                 />
-                <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+                <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-expense peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                   Tags
                 </label>
               </div>
@@ -250,39 +258,39 @@ export default function NewTransactionComponent() {
           </div>
           <hr className="border-dark5 my-3" />
           <div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="text"
                 id="description"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Descrição
               </label>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="text"
                 id="amount"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Valor
               </label>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="date"
                 id="vencimento"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Vencimento
               </label>
             </div>
@@ -319,24 +327,24 @@ export default function NewTransactionComponent() {
                 )}
               </div>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <select
                 id="category"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
                 required
               >
                 <option value="1">Alimentação</option>
                 <option value="1">Carro</option>
                 <option value="1">Computador</option>
               </select>
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Categoria
               </label>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <select
                 id="account"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
                 required
               >
                 <option value="1">Minha Carteira</option>
@@ -352,7 +360,7 @@ export default function NewTransactionComponent() {
                 </option>
                 <option value="1">Next</option>
               </select>
-              <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Conta
               </label>
             </div>
@@ -367,18 +375,20 @@ export default function NewTransactionComponent() {
               </div>
             )}
             {showMoreIncome && (
-              <div class="relative mb-6">
-                <input
-                  type="text"
-                  id="tags"
-                  class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
-                  placeholder=" "
-                  required
-                />
-                <label class="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
-                  Tags
-                </label>
-              </div>
+              <>
+                <div className="relative mb-6">
+                  <input
+                    type="text"
+                    id="tags"
+                    className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-income focus:outline-none focus:ring-0 peer"
+                    placeholder=" "
+                    required
+                  />
+                  <label className="bg-dark3 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-income peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+                    Tags
+                  </label>
+                </div>
+              </>
             )}
           </div>
         </div>
