@@ -18,7 +18,7 @@ export default function Accounts() {
           <AccountHeaderComponent />
           <CardBalanceComponent />
         </div>
-        <div className="flex flex-row flex-wrap items-center justify-center p-4">
+        <div className="flex flex-row flex-wrap items-center p-4">
           <NewAccountComponent />
 
           <CardsAccountsComponent
