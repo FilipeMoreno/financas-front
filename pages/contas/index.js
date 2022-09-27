@@ -13,7 +13,7 @@ export default function Accounts() {
     <>
       <title>Contas | Finanças</title>
       <Header />
-      <div className=" bg-dark">
+      <div className="bg-dark">
         <div>
           <AccountHeaderComponent />
           <CardBalanceComponent />

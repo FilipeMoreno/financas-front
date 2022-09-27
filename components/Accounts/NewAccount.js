@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
 import CurrencyInput from 'react-currency-input-field'
 import ReactModal from 'react-modal'
+import Image from 'next/image'
 
 export default function NewAccountComponent() {
   const [modalIsOpen1, setIsOpen1] = useState(false)
+  const [modalIsOpen2, setIsOpen2] = useState(false)
+  const [modalIsOpen3, setIsOpen3] = useState(false)
+  const [selectedBank, setSelectedBank] = useState({})
 
   const customStyles = {
     content: {
@@ -31,6 +35,22 @@ export default function NewAccountComponent() {
     setIsOpen1(false)
   }
 
+  function openModal2() {
+    setIsOpen2(true)
+  }
+
+  function closeModal2() {
+    setIsOpen2(false)
+  }
+
+  function openModal3() {
+    setIsOpen3(true)
+  }
+
+  function closeModal3() {
+    setIsOpen3(false)
+  }
+
   return (
     <>
       <ReactModal
@@ -38,7 +58,7 @@ export default function NewAccountComponent() {
         onRequestClose={closeModal1}
         style={customStyles}
       >
-        <div className="lg:w-[400px] sm:w-[300px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
+        <div className="lg:w-[500px] sm:w-[300px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
           <div className="text-gray-300 flex items-center justify-between">
             <h1 className="text-2xl font-bold text-textPrimary">Nova conta</h1>
             <h1
@@ -76,7 +96,28 @@ export default function NewAccountComponent() {
               />
             </div>
 
-            <div className="">
+            <div>
+              <h1 className="text-md">Instituição financeira</h1>
+              <div className="flex flex-row items-center border-0 border-b-2 border-gray-600">
+                <Image
+                  className="rounded-full"
+                  height={40}
+                  width={40}
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png'
+                  }
+                />
+
+                <div
+                  onClick={openModal2}
+                  className="block cursor-pointer rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 appearance-none focus:border-roxo focus:outline-none focus:ring-0 peer"
+                >
+                  {selectedBank.name ? selectedBank.name : 'Selecione'}
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="">
               <h1 className="text-md">Instituição financeira</h1>
               <select className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer">
                 <option>Nubank</option>
@@ -85,7 +126,7 @@ export default function NewAccountComponent() {
                 <option>Itaú</option>
                 <option>Caixa</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="">
               <h1 className="text-md">Tipo da conta</h1>
@@ -106,6 +147,129 @@ export default function NewAccountComponent() {
                 <option>Amarelo</option>
                 <option>Verde</option>
               </select>
+            </div>
+          </div>
+        </div>
+      </ReactModal>
+      <ReactModal
+        isOpen={modalIsOpen2}
+        onRequestClose={closeModal2}
+        style={customStyles}
+      >
+        <div className="lg:w-[400px] sm:w-[300px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
+          <div className="absolute">
+            <div className="flex text-gray-300 items-center justify-between bg-dark3">
+              <h1 className="text-md font-bold text-textPrimary">
+                Selecione uma instituição financeira
+              </h1>
+              <h1
+                onClick={closeModal2}
+                className="text-lg font-bold cursor-pointer mr-4"
+              >
+                X
+              </h1>
+            </div>
+            <hr className="border-dark5 my-3" />
+            <div className="mb-4 -mt-2">
+              <input
+                type="text"
+                id="search-bank"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                placeholder="Pesquisar"
+                required
+              />
+            </div>
+          </div>
+          <div className="mt-32 h-[200px] overflow-y">
+            <div>
+              <div
+                onClick={
+                  (() =>
+                    setSelectedBank({
+                      name: 'Nubank',
+                      image:
+                        'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png'
+                    }),
+                  closeModal2)
+                }
+                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
+              >
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Nubank</p>
+              </div>
+              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/bb.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Banco do Brasil</p>
+              </div>
+              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/bradesco.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Bradesco</p>
+              </div>
+              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/caixa.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Caixa</p>
+              </div>
+              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/intermedium.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Inter</p>
+              </div>
+              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/itau.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Itaú</p>
+              </div>
+              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
+                <Image
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                  src={
+                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/next.png'
+                  }
+                />
+                <p className="text-lg font-medium mx-3">Next</p>
+              </div>
             </div>
           </div>
         </div>

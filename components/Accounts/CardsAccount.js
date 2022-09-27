@@ -5,7 +5,7 @@ import { MdMoreVert } from 'react-icons/md'
 export default function CardsAccountsComponent({ name, icon_url, account }) {
   return (
     <>
-      <div className="bg-dark3 border-b-4 border-black lg:w-[320px] sm:w-full h-[210px] rounded-xl mx-3 my-3 p-5">
+      <div className="bg-dark3 border-b-4 border-black lg:w-[300px] sm:w-full h-[210px] rounded-xl mx-3 my-5 p-5">
         <div className="flex items-center justify-between">
           <div className="flex flex-row items-center justify-center">
             <Image
