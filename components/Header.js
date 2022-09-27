@@ -1,12 +1,16 @@
-import CookieConsent from 'react-cookie-consent'
+import { motion } from 'framer-motion'
+import { useContext, useEffect, useState } from 'react'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import CookieConsent, { Cookies } from 'react-cookie-consent'
 import Link from 'next/link'
+
+import { MdSettings } from 'react-icons/md'
 
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import { FaPercentage, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import {
   MdAccountCircle,
-  MdAttachMoney,
   MdSettings,
   MdShowChart
 } from 'react-icons/md'
@@ -16,7 +20,7 @@ import {
   BsFillGrid1X2Fill,
   BsFillPieChartFill
 } from 'react-icons/bs'
-import { GoGraph } from 'react-icons/go'
+
 
 export default function Header() {
   const router = useRouter()

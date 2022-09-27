@@ -19,7 +19,6 @@
 .DS_Store
 *.pem
 /PLANEJAMENTO
-/git-old
 
 # debug
 npm-debug.log*

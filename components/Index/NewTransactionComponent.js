@@ -57,9 +57,9 @@ export default function NewTransactionComponent() {
       <div className="dropdown">
         <label
           tabIndex="0"
-          className="flex flex-row items-center bg-roxo md:p-4 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm text-white cursor-pointer"
+          className="flex flex-row items-center bg-roxo md:p-4 sm:p-2 rounded-lg font-bold md:text-md sm:text-sm"
         >
-          <FaPlus className="mr-1 text-white" /> Nova transação
+          <FaPlus className="mr-1" /> Nova transação
         </label>
         <ul
           tabIndex="0"
