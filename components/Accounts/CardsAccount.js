@@ -22,7 +22,7 @@ export default function CardsAccountsComponent({ name, icon_url, account }) {
             </label>
             <ul
               tabIndex="0"
-              className="dropdown-content menu p-2 shadow-lg bg-dark4 rounded-box w-52 text-white"
+              className="dropdown-content menu p-2 shadow-lg bg-dark4 border-b-4 border-black rounded-box w-52 text-white"
             >
               <li>
                 <a>Editar</a>
