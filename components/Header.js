@@ -4,23 +4,18 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import CookieConsent, { Cookies } from 'react-cookie-consent'
 import Link from 'next/link'
 
-import { MdSettings } from 'react-icons/md'
+import { MdSettings, MdAccountCircle, MdShowChart } from 'react-icons/md'
 
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import { FaPercentage, FaSignOutAlt, FaUser } from 'react-icons/fa'
-import {
-  MdAccountCircle,
-  MdSettings,
-  MdShowChart
-} from 'react-icons/md'
+
 import {
   BsBank2,
   BsCreditCardFill,
   BsFillGrid1X2Fill,
   BsFillPieChartFill
 } from 'react-icons/bs'
-
 
 export default function Header() {
   const router = useRouter()
