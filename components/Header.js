@@ -151,26 +151,26 @@ export default function Header() {
             </label>
             <ul
               tabIndex="0"
-              className="dropdown-content menu p-2 shadow border-b-4 border-black bg-dark3 rounded-tr-none rounded-tl-lg rounded-b-lg w-52 text-gray-300"
+              className="dropdown-content  p-2 shadow border-b-4 border-black bg-dark3 rounded-tr-none rounded-tl-lg rounded-b-lg w-52 text-gray-300"
             >
               <Link href="#">
                 <li className="flex flex-row items-center hover:text-roxo cursor-pointer p-2">
-                  <p>
-                    <FaUser /> Meu perfil
+                  <p className="flex flex-row items-center justify-center">
+                    <FaUser className="mr-2" /> Meu perfil
                   </p>
                 </li>
               </Link>
               <Link href="#">
                 <li className="flex flex-row items-center hover:text-roxo cursor-pointer p-2">
-                  <p>
-                    <MdSettings />
+                  <p className="flex flex-row items-center justify-center">
+                    <MdSettings className="mr-2" />
                     Configurações
                   </p>
                 </li>
               </Link>
               <li className="flex flex-row items-center hover:text-red-500 cursor-pointer p-2 ">
-                <p>
-                  <FaSignOutAlt />
+                <p className="flex flex-row items-center justify-center">
+                  <FaSignOutAlt className="mr-2" />
                   Sair
                 </p>
               </li>
