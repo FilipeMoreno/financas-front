@@ -3,6 +3,6 @@ module.exports = {
   poweredByHeader: false,
   reactStrictMode: true,
   images: {
-    domains: ['i.imgur.com', 'localhost'],
+    domains: ['i.imgur.com', 'localhost', 'raw.githubusercontent.com'],
   },
 }
