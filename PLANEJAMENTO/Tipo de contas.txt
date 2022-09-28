@@ -1,8 +1,0 @@
-## TIPO DE CONTAS
-
-- Conta Corrente
-- Carteira
-- Poupança
-- Investimentos
-- Outros
-
