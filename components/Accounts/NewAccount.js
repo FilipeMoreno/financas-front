@@ -58,7 +58,7 @@ export default function NewAccountComponent() {
         onRequestClose={closeModal1}
         style={customStyles}
       >
-        <div className="lg:w-[500px] sm:w-[300px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
+        <div className="lg:w-[500px] sm:w-[300px] h-[440px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
           <div className="text-gray-300 flex items-center justify-between">
             <h1 className="text-2xl font-bold text-textPrimary">Nova conta</h1>
             <h1
@@ -83,6 +83,7 @@ export default function NewAccountComponent() {
                 step={1}
                 intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
                 onValueChange={(value, name) => console.log(value, name)}
+                autoComplete={'off'}
               />
             </div>
 
@@ -117,17 +118,6 @@ export default function NewAccountComponent() {
               </div>
             </div>
 
-            {/* <div className="">
-              <h1 className="text-md">Instituição financeira</h1>
-              <select className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer">
-                <option>Nubank</option>
-                <option>Next</option>
-                <option>Inter</option>
-                <option>Itaú</option>
-                <option>Caixa</option>
-              </select>
-            </div> */}
-
             <div className="">
               <h1 className="text-md">Tipo da conta</h1>
               <select className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer">
@@ -138,15 +128,10 @@ export default function NewAccountComponent() {
                 <option>Outros</option>
               </select>
             </div>
-            <div className="">
-              <h1 className="text-md">Cor</h1>
-              <select className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer">
-                <option>Azul</option>
-                <option>Vermelho</option>
-                <option>Roxo</option>
-                <option>Amarelo</option>
-                <option>Verde</option>
-              </select>
+            <div>
+              <button className="w-full bg-roxo text-white rounded-lg py-2 mt-8">
+                Salvar
+              </button>
             </div>
           </div>
         </div>
@@ -158,23 +143,25 @@ export default function NewAccountComponent() {
       >
         <div className="lg:w-[400px] sm:w-[300px] overflow-y-scroll scrollbar-thin scrollbar-thumb-dark2 scrollbar-track-dark p-4">
           <div className="absolute">
-            <div className="flex text-gray-300 items-center justify-between bg-dark3">
-              <h1 className="text-md font-bold text-textPrimary">
-                Selecione uma instituição financeira
-              </h1>
-              <h1
-                onClick={closeModal2}
-                className="text-lg font-bold cursor-pointer mr-4"
-              >
-                X
-              </h1>
+            <div className="text-gray-300  bg-dark3 lg:w-[360px] sm:w-auto">
+              <div className="flex flex-row items-center justify-between">
+                <h1 className="text-md font-bold text-textPrimary lg:w-auto sm:w-[200px]">
+                  Selecione uma instituição financeira
+                </h1>
+                <h1
+                  onClick={closeModal2}
+                  className="text-lg font-bold cursor-pointer"
+                >
+                  X
+                </h1>
+              </div>
             </div>
             <hr className="border-dark5 my-3" />
             <div className="mb-4 -mt-2">
               <input
                 type="text"
                 id="search-bank"
-                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg pt-5 w-full text-sm text-gray-300 bg-dark3 border-0 border-b-2 appearance-none border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
                 placeholder="Pesquisar"
                 required
               />
