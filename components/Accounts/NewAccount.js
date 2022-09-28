@@ -180,7 +180,7 @@ export default function NewAccountComponent() {
               />
             </div>
           </div>
-          <div className="mt-32 h-[200px] overflow-y">
+          <div className="mt-32 h-[200px] overflow-y scrollbar scrollbar-track-transparent">
             <div>
               <div
                 onClick={
