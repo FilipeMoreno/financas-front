@@ -1,0 +1,11 @@
+## BANDEIRAS CARTÕES DE CRÉDITO
+
+- Visa
+- MasterCard
+- Elo
+- Hipercard
+- American Express
+- Diners CLub
+- Cartão BNDES
+- Outros
+
