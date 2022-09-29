@@ -10,8 +10,10 @@ export default function CardsAccountsComponent({ name, icon_url, account }) {
           <div className="flex flex-row items-center justify-center">
             <Image
               className="rounded-full"
+              alt={`Logo do ${name}`}
               width={40}
               height={40}
+              blurDataURL={icon_url}
               src={icon_url}
             />
             <h1 className="text-xl font-bold text-white ml-2">{name}</h1>

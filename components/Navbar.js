@@ -9,14 +9,13 @@ import {
 import { FaPercentage, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { MdAccountCircle, MdSettings, MdShowChart } from 'react-icons/md'
 
-function NavLink({ to, children }) {
+function NavLink({ to, children, active }) {
   return (
-    <a
-      href={to}
-      className="flex flex-row items-center justify-center mx-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white p-2"
-    >
-      {children}
-    </a>
+    <Link href={to}>
+      <a className="flex flex-row items-center justify-center mx-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white p-2">
+        {children}
+      </a>
+    </Link>
   )
 }
 
@@ -209,7 +208,7 @@ export default function Navbar() {
             ORÇAMENTOS
           </NavLink>
         </div>
-        <div className="sm:hidden md:relative dropdown dropdown-end">
+        <div className="sm:hidden md:flex dropdown dropdown-end">
           <label tabIndex="0" className="cursor-pointer">
             <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
               <div className="flex flex-row items-center">
