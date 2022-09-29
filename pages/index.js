@@ -26,7 +26,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <title>Finanças</title>
       <div>
         <div className="flex md:flex-row sm:flex-col bg-dark2 md:h-32 sm:h-48 rounded-b-3xl justify-around items-center mb-8">
@@ -78,7 +77,6 @@ export default function Home() {
           <TransactionsComponent hideValue={hideValue} />
         </div> */}
       </div>
-      <Footer />
     </>
   )
 }

@@ -11,6 +11,8 @@ import '../styles/nprogress.css'
 import Layout from '../components/Layout'
 
 import { AnimateSharedLayout } from 'framer-motion'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 const ViewportMetaLink = () => (
   <meta
@@ -43,8 +45,9 @@ function MyApp({ Component, pageProps }) {
         <Layout>
           <ToastProvider>
             <ViewportMetaLink />
-
+            <Navbar />
             <Component {...pageProps} />
+            <Footer />
           </ToastProvider>
         </Layout>
       </AnimateSharedLayout>

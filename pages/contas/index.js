@@ -12,7 +12,6 @@ export default function Accounts() {
   return (
     <>
       <title>Contas | Finanças</title>
-      <Header />
       <div className="bg-dark">
         <div>
           <AccountHeaderComponent />
@@ -42,7 +41,6 @@ export default function Accounts() {
           />
         </div>
       </div>
-      <Footer />
     </>
   )
 }

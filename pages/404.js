@@ -17,7 +17,6 @@ export default function Custom404() {
 
   return (
     <>
-      <Header />
       <title>404 - Página não encontrada | Rede Battle</title>
       <div className="flex items-center justify-center p-8">
         <div className="p-6 max-w-3xl bg-white rounded-lg border-gray-200 shadow-md dark:bg-dark2 dark:border-b-4 dark:border-black">
@@ -78,7 +77,6 @@ export default function Custom404() {
           </motion.div>
         </div> */}
       </div>
-      <Footer />
     </>
   )
 }
