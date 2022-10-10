@@ -5,13 +5,16 @@ import ReactModal from 'react-modal'
 import Image from 'next/image'
 import api from '../../service/api'
 
-export default function NewAccountComponent() {
+export default function NewAccountComponent({ types, banks }) {
   const [modalIsOpen1, setIsOpen1] = useState(false)
   const [modalIsOpen2, setIsOpen2] = useState(false)
   const [modalIsOpen3, setIsOpen3] = useState(false)
-  const [searchBank, setSearchBank] = useState('')
-  const [accountsTypes, setAccoutsType] = useState()
-  const [banksList, setBanksList] = useState()
+  const [searchBank, setSearchBank] = useState(banks)
+
+  async function handleSearchBank(ctx) {
+    const getSearchResponse = await api.get(`/banks/get/search?name=${ctx}`)
+    setSearchBank(getSearchResponse.data)
+  }
 
   const [accountType, setAccountType] = useState({
     name: 'Selecione',
@@ -24,28 +27,6 @@ export default function NewAccountComponent() {
     image:
       'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/cofre.jpg'
   })
-
-  useEffect(() => {
-    api
-      .get('/accounts/types/get/all')
-      .then(res => {
-        setAccoutsType(res.data)
-      })
-      .catch(e => {
-        console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
-      })
-  }, [accountsTypes])
-
-  useEffect(() => {
-    api
-      .get('/banks/get/all')
-      .then(res => {
-        setBanksList(res.data)
-      })
-      .catch(e => {
-        console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
-      })
-  }, [banksList])
 
   const customStyles = {
     content: {
@@ -215,13 +196,15 @@ export default function NewAccountComponent() {
                 className="block rounded-t-lg pt-5 w-full text-sm text-gray-300 bg-dark3 border-0 border-b-2 appearance-none border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
                 placeholder="Pesquisar"
                 autoComplete="off"
-                onChange={e => setSearchBank(e.target.value)}
+                onChange={e => {
+                  handleSearchBank(e.target.value)
+                }}
               />
             </div>
           </div>
           <div className="mt-32 h-[200px] overflow-y scrollbar scrollbar-track-transparent">
             <div>
-              {banksList?.map(bank => {
+              {searchBank?.map(bank => {
                 return (
                   <div
                     key={bank.id}
@@ -271,7 +254,7 @@ export default function NewAccountComponent() {
           </div>
           <div className="mt-12 h-[300px] overflow-y scrollbar scrollbar-track-transparent">
             <div>
-              {accountsTypes?.map(type => {
+              {types?.map(type => {
                 return (
                   <div
                     key={type.id}

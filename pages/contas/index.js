@@ -7,19 +7,8 @@ import NewAccountComponent from '../../components/Accounts/NewAccount'
 import api from '../../service/api'
 import { useEffect, useState } from 'react'
 
-export default function Accounts({ types }) {
+export default function Accounts({ getAllBanks, getAccountsTypes }) {
   const [accountsTypes, setAccoutsType] = useState()
-
-  useEffect(() => {
-    api
-      .get('/accounts/types/get/all')
-      .then(res => {
-        setAccoutsType(res.data)
-      })
-      .catch(e => {
-        console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
-      })
-  })
 
   return (
     <>
@@ -30,7 +19,7 @@ export default function Accounts({ types }) {
           <CardBalanceComponent />
         </div>
         <div className="flex flex-row flex-wrap items-center p-4">
-          <NewAccountComponent />
+          <NewAccountComponent banks={getAllBanks} types={getAccountsTypes} />
 
           <CardsAccountsComponent
             name={'Carteira'}
@@ -57,17 +46,35 @@ export default function Accounts({ types }) {
   )
 }
 
-// export const getServerSideProps = async ctx => {
-//   let statusCode = { code: 200 }
+export const getServerSideProps = async ctx => {
+  let statusCode = { code: 200 }
 
-//   const { 'financas.token': token } = await parseCookies(ctx)
+  const { 'financas.token': token } = await parseCookies(ctx)
 
-//   if (!token) {
-//     return {
-//       redirect: {
-//         destination: '/auth/login',
-//         permanent: false
-//       }
-//     }
-//   }
-// }
+  const getAccountsTypes = await api
+    .get('/accounts/types/get/all')
+    .then(res => res.data)
+    .catch(e => {
+      console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
+    })
+
+  const getAllBanks = await api
+    .get('/banks/get/all')
+    .then(res => res.data)
+    .catch(e => {
+      console.log('Ocorreu um erro ao acessar a API de getAllBanks', e)
+    })
+
+  // if (!token) {
+  //   return {
+  //     redirect: {
+  //       destination: '/auth/login',
+  //       permanent: false
+  //     }
+  //   }
+  // }
+
+  return {
+    props: { getAllBanks, getAccountsTypes }
+  }
+}
