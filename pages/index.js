@@ -1,17 +1,13 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import api from '../service/api'
 
 import AccountsComponent from '../components/Index/Accounts'
 import BillsToPayComponent from '../components/Index/Bills/BillsToPay'
 import BillsToReceiverComponent from '../components/Index/Bills/BillsToReceiver'
 import CardComponent from '../components/Index/Cards'
 import TransactionsComponent from '../components/Index/Transactions'
-
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import { FaPlus } from 'react-icons/fa'
-import { AiOutlineFileSearch } from 'react-icons/ai'
 import DetailsComponent from '../components/Index/DetailsComponent'
 import NewTransactionComponent from '../components/Index/NewTransactionComponent'
 

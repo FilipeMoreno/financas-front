@@ -1,14 +1,26 @@
 import { parseCookies } from 'nookies'
 
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-
 import CardBalanceComponent from '../../components/Accounts/CardBalance'
 import AccountHeaderComponent from '../../components/Accounts/AccountHeader'
 import CardsAccountsComponent from '../../components/Accounts/CardsAccount'
 import NewAccountComponent from '../../components/Accounts/NewAccount'
+import api from '../../service/api'
+import { useEffect, useState } from 'react'
 
-export default function Accounts() {
+export default function Accounts({ types }) {
+  const [accountsTypes, setAccoutsType] = useState()
+
+  useEffect(() => {
+    api
+      .get('/accounts/types/get/all')
+      .then(res => {
+        setAccoutsType(res.data)
+      })
+      .catch(e => {
+        console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
+      })
+  })
+
   return (
     <>
       <title>Contas | Finanças</title>

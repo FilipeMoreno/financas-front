@@ -3,22 +3,49 @@ import { FaPlus } from 'react-icons/fa'
 import CurrencyInput from 'react-currency-input-field'
 import ReactModal from 'react-modal'
 import Image from 'next/image'
+import api from '../../service/api'
 
 export default function NewAccountComponent() {
   const [modalIsOpen1, setIsOpen1] = useState(false)
   const [modalIsOpen2, setIsOpen2] = useState(false)
   const [modalIsOpen3, setIsOpen3] = useState(false)
   const [searchBank, setSearchBank] = useState('')
+  const [accountsTypes, setAccoutsType] = useState()
+  const [banksList, setBanksList] = useState()
+
   const [accountType, setAccountType] = useState({
     name: 'Selecione',
     image:
       'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/cofre.jpg'
   })
+
   const [selectedBank, setSelectedBank] = useState({
     name: 'Selecione',
     image:
       'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/cofre.jpg'
   })
+
+  useEffect(() => {
+    api
+      .get('/accounts/types/get/all')
+      .then(res => {
+        setAccoutsType(res.data)
+      })
+      .catch(e => {
+        console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
+      })
+  }, [accountsTypes])
+
+  useEffect(() => {
+    api
+      .get('/banks/get/all')
+      .then(res => {
+        setBanksList(res.data)
+      })
+      .catch(e => {
+        console.log('Ocorreu um erro ao acessar a API de getAccountsTypes', e)
+      })
+  }, [banksList])
 
   const customStyles = {
     content: {
@@ -194,101 +221,28 @@ export default function NewAccountComponent() {
           </div>
           <div className="mt-32 h-[200px] overflow-y scrollbar scrollbar-track-transparent">
             <div>
-              <div
-                onClick={() =>
-                  handleBankSelection({
-                    name: 'Nubank',
-                    image:
-                      'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Nubank</p>
-              </div>
-              <div
-                onClick={() =>
-                  handleBankSelection({
-                    name: 'Banco do Brasil',
-                    image:
-                      'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/bb.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/bb.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Banco do Brasil</p>
-              </div>
-              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/bradesco.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Bradesco</p>
-              </div>
-              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/caixa.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Caixa</p>
-              </div>
-              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/intermedium.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Inter</p>
-              </div>
-              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/itau.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Itaú</p>
-              </div>
-              <div className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer">
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/next.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Next</p>
-              </div>
+              {banksList?.map(bank => {
+                return (
+                  <div
+                    key={bank.id}
+                    onClick={() =>
+                      handleBankSelection({
+                        name: bank.name,
+                        image: bank.icon_url
+                      })
+                    }
+                    className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
+                  >
+                    <Image
+                      height={40}
+                      width={40}
+                      className="rounded-full"
+                      src={bank.icon_url}
+                    />
+                    <p className="text-lg font-medium mx-3">{bank.name}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -317,94 +271,28 @@ export default function NewAccountComponent() {
           </div>
           <div className="mt-12 h-[300px] overflow-y scrollbar scrollbar-track-transparent">
             <div>
-              <div
-                onClick={() =>
-                  handleAccountType({
-                    name: 'Conta Corrente',
-                    image: 'https://i.imgur.com/sitdQBb.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={'https://i.imgur.com/sitdQBb.png'}
-                />
-                <p className="text-lg font-medium mx-3">Conta Corrente</p>
-              </div>
-              <div
-                onClick={() =>
-                  handleAccountType({
-                    name: 'Carteira',
-                    image:
-                      'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/carteira.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={
-                    'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/carteira.png'
-                  }
-                />
-                <p className="text-lg font-medium mx-3">Carteira</p>
-              </div>
-              <div
-                onClick={() =>
-                  handleAccountType({
-                    name: 'Poupança',
-                    image: 'https://i.imgur.com/6k99cOK.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={'https://i.imgur.com/6k99cOK.png'}
-                />
-                <p className="text-lg font-medium mx-3">Poupança</p>
-              </div>
-              <div
-                onClick={() =>
-                  handleAccountType({
-                    name: 'Investimentos',
-                    image: 'https://i.imgur.com/SzRkYJU.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={'https://i.imgur.com/SzRkYJU.png'}
-                />
-                <p className="text-lg font-medium mx-3">Investimentos</p>
-              </div>
-              <div
-                onClick={() =>
-                  handleAccountType({
-                    name: 'Outros',
-                    image: 'https://i.imgur.com/aSMTvd8.png'
-                  })
-                }
-                className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
-              >
-                <Image
-                  height={40}
-                  width={40}
-                  className="rounded-full"
-                  src={'https://i.imgur.com/aSMTvd8.png'}
-                />
-                <p className="text-lg font-medium mx-3">Outros</p>
-              </div>
+              {accountsTypes?.map(type => {
+                return (
+                  <div
+                    key={type.id}
+                    onClick={() =>
+                      handleAccountType({
+                        name: type.name,
+                        image: type.icon_url
+                      })
+                    }
+                    className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
+                  >
+                    <Image
+                      height={40}
+                      width={40}
+                      className="rounded-full"
+                      src={type.icon_url}
+                    />
+                    <p className="text-lg font-medium mx-3">{type.name}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
