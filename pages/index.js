@@ -14,6 +14,7 @@ import { FaPlus } from 'react-icons/fa'
 import { AiOutlineFileSearch } from 'react-icons/ai'
 import DetailsComponent from '../components/Index/DetailsComponent'
 import NewTransactionComponent from '../components/Index/NewTransactionComponent'
+import { parseCookies } from 'nookies'
 
 export default function Home() {
   const router = useRouter()
@@ -22,6 +23,7 @@ export default function Home() {
 
   function handleHideValue() {
     setHideValue(!hideValue)
+    localStorage.setItem('hide-amount', !hideValue)
   }
 
   return (
