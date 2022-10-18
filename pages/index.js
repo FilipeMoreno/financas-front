@@ -12,7 +12,7 @@ import DetailsComponent from '../components/Index/DetailsComponent'
 import NewTransactionComponent from '../components/Index/NewTransactionComponent'
 import { parseCookies } from 'nookies'
 
-export default function Home() {
+export default function Home({ dashboard }) {
   const router = useRouter()
 
   const [hideValue, setHideValue] = useState(false)
@@ -37,7 +37,12 @@ export default function Home() {
               </a>
             </div>
             {(!hideValue && (
-              <h1 className="font-bold text-4xl">R$ 100,00</h1>
+              <h1 className="font-bold text-4xl">
+                {Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
+                }).format(dashboard.saldo)}
+              </h1>
             )) || <h1 className="font-bold text-4xl">🙈🙈🙈</h1>}
             <DetailsComponent />
           </div>
@@ -47,7 +52,10 @@ export default function Home() {
         </div>
         <div className="grid overflow-hidden md:grid-cols-2 sm:grid-cols-1 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row md:mx-12 sm:mx-6">
           <div className="box">
-            <AccountsComponent hideValue={hideValue} />
+            <AccountsComponent
+              accounts={dashboard.contas}
+              hideValue={hideValue}
+            />
           </div>
           <div className="box row-span-2">
             <BillsToReceiverComponent hideValue={hideValue} />
@@ -62,19 +70,29 @@ export default function Home() {
             <BillsToPayComponent hideValue={hideValue} />
           </div>
         </div>
-
-        {/* <div className="flex flex-col items-center justify-center">
-          <AccountsComponent hideValue={hideValue} />
-
-          <BillsToReceiverComponent hideValue={hideValue} />
-
-          <BillsToPayComponent hideValue={hideValue} />
-
-          <CardComponent />
-
-          <TransactionsComponent hideValue={hideValue} />
-        </div> */}
       </div>
     </>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  // const { ['finances.token']: token } = parseCookies(ctx)
+
+  // if (!token) {
+  //   return {
+  //     redirect: {
+  //       destination: '/login',
+  //       permanent: false
+  //     }
+  //   }
+  // }
+
+  const dashboard = await api
+    .get('/dashboard/get')
+    .then(res => res.data)
+    .catch(error => console.log(error))
+
+  return {
+    props: { dashboard }
+  }
 }
