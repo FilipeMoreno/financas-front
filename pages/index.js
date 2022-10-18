@@ -1,17 +1,13 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import api from '../service/api'
 
-import AccountsComponent from '../components/Accounts'
-import BillsToPayComponent from '../components/Bills/BillsToPay'
-import BillsToReceiverComponent from '../components/Bills/BillsToReceiver'
-import CardComponent from '../components/Cards'
-import TransactionsComponent from '../components/Transactions'
-
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import { FaPlus } from 'react-icons/fa'
-import { AiOutlineFileSearch } from 'react-icons/ai'
+import AccountsComponent from '../components/Index/Accounts'
+import BillsToPayComponent from '../components/Index/Bills/BillsToPay'
+import BillsToReceiverComponent from '../components/Index/Bills/BillsToReceiver'
+import CardComponent from '../components/Index/Cards'
+import TransactionsComponent from '../components/Index/Transactions'
 import DetailsComponent from '../components/Index/DetailsComponent'
 import NewTransactionComponent from '../components/Index/NewTransactionComponent'
 import { parseCookies } from 'nookies'
@@ -28,7 +24,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <title>Finanças</title>
       <div>
         <div className="flex md:flex-row sm:flex-col bg-dark2 md:h-32 sm:h-48 rounded-b-3xl justify-around items-center mb-8">
@@ -80,7 +75,6 @@ export default function Home() {
           <TransactionsComponent hideValue={hideValue} />
         </div> */}
       </div>
-      <Footer />
     </>
   )
 }

@@ -14,20 +14,20 @@ export default function Login() {
               <h1 className="text-4xl font-bold">Entrar</h1>
               <p className="">Acesse sua conta para continuar...</p>
             </div>
-            <div class="relative mb-6">
+            <div className="relative mb-6">
               <input
                 type="email"
                 id="email"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
-              <label class="bg-dark absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-roxo peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-roxo peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 E-mail
               </label>
-              <div class="flex absolute inset-y-0 right-4 items-center pl-3 pointer-events-none">
+              <div className="flex absolute inset-y-0 right-4 items-center pl-3 pointer-events-none">
                 <svg
-                  class="w-5 h-5 text-gray-400"
+                  className="w-5 h-5 text-gray-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -37,22 +37,22 @@ export default function Login() {
                 </svg>
               </div>
             </div>
-            <div class="relative my-6">
+            <div className="relative my-6">
               <input
                 type={isVisible ? 'text' : 'password'}
                 id="password"
-                class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
                 placeholder=" "
                 required
               />
 
-              <label class="bg-dark absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-roxo peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              <label className="bg-dark absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-roxo peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Senha
               </label>
               {(isVisible && (
                 <a
                   onClick={() => setIsVisible(false)}
-                  class="flex absolute inset-y-0 right-4 items-center pl-3 cursor-pointer"
+                  className="flex absolute inset-y-0 right-4 items-center pl-3 cursor-pointer"
                 >
                   <p className="hover:bg-dark2 hover:rounded-full p-2 -mr-2">
                     <FaEyeSlash className="text-xl text-gray-400" />
@@ -61,7 +61,7 @@ export default function Login() {
               )) || (
                 <a
                   onClick={() => setIsVisible(true)}
-                  class="flex absolute inset-y-0 right-4 items-center pl-3 cursor-pointer"
+                  className="flex absolute inset-y-0 right-4 items-center pl-3 cursor-pointer"
                 >
                   <p className="hover:bg-dark2 hover:rounded-full p-2 -mr-2">
                     <FaEye className="text-xl text-gray-400" />

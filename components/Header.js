@@ -4,29 +4,20 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import CookieConsent, { Cookies } from 'react-cookie-consent'
 import Link from 'next/link'
 
-import {
-  FaHome,
-  FaShoppingCart,
-  FaDiscord,
-  FaBan,
-  FaUsers,
-  FaFile,
-  FaSignInAlt,
-  FaShoppingBasket,
-  FaUserAlt,
-  FaUser,
-  FaServer,
-  FaHeadset,
-  FaCoins,
-  FaSignOutAlt
-} from 'react-icons/fa'
-
-import { MdSettings } from 'react-icons/md'
+import { MdSettings, MdAccountCircle, MdShowChart } from 'react-icons/md'
 
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import { FaPercentage, FaSignOutAlt, FaUser } from 'react-icons/fa'
 
-export default function Header(context, { online }) {
+import {
+  BsBank2,
+  BsCreditCardFill,
+  BsFillGrid1X2Fill,
+  BsFillPieChartFill
+} from 'react-icons/bs'
+
+export default function Header() {
   const router = useRouter()
 
   const Toast = Swal.mixin({
@@ -40,7 +31,7 @@ export default function Header(context, { online }) {
 
   return (
     <header>
-      <nav className="px-2 sm:px-4 py-2.5 bg-dark2 ">
+      <nav className="px-2 sm:px-4 py-2.5 bg-dark2">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <button
             data-collapse-toggle="mobile-menu"
@@ -85,17 +76,21 @@ export default function Header(context, { online }) {
               <li>
                 <Link href="/">
                   <a
-                    className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 hover:bg-purple-800 focus:bg-purple-800  dark:border-black"
+                    className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white"
                     aria-current="page"
                   >
-                    <div className="flex flex-row items-center">RESUMO</div>
+                    <div className="flex flex-row justify-center items-center">
+                      <BsFillGrid1X2Fill className="mr-2" />
+                      RESUMO
+                    </div>
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/lancamentos">
-                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-black dark:hover:bg-purple-800 focus:bg-purple-800 dark:border-black">
-                    <div className="flex flex-row items-center">
+                  <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
+                    <div className="flex flex-row justify-center items-center">
+                      <MdShowChart className="mr-2" />
                       LANÇAMENTOS
                     </div>
                   </a>
@@ -103,29 +98,41 @@ export default function Header(context, { online }) {
               </li>
               <li>
                 <Link href="/contas">
-                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-black dark:hover:bg-purple-800 focus:bg-purple-800 dark:border-black">
-                    <div className="flex flex-row items-center">CONTAS</div>
+                  <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
+                    <div className="flex flex-row justify-center items-center">
+                      <BsBank2 className="mr-2" />
+                      CONTAS
+                    </div>
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/cartoes">
-                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-black dark:hover:bg-purple-800 focus:bg-purple-800 dark:border-black">
-                    <div className="flex flex-row items-center">CARTÕES</div>
+                  <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
+                    <div className="flex flex-row justify-center items-center">
+                      <BsCreditCardFill className="mr-2" />
+                      CARTÕES
+                    </div>
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/relatorios">
-                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-purple-800 focus:bg-purple-800 dark:hover:text-white dark:border-black">
-                    <div className="flex flex-row items-center">RELATÓRIOS</div>
+                  <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
+                    <div className="flex flex-row justify-center items-center">
+                      <BsFillPieChartFill className="mr-2" />
+                      RELATÓRIOS
+                    </div>
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/orcamento">
-                  <a className="block py-2 pr-4 pl-3 text-white font-bold rounded md:bg-transparent md:text-gray-300 md:p-0 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 dark:hover:bg-purple-800 focus:bg-purple-800 dark:hover:text-white dark:border-black">
-                    <div className="flex flex-row items-center">ORÇAMENTOS</div>
+                  <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
+                    <div className="flex flex-row justify-center items-center">
+                      <FaPercentage className="mr-2" />
+                      ORÇAMENTOS
+                    </div>
                   </a>
                 </Link>
               </li>
@@ -134,32 +141,38 @@ export default function Header(context, { online }) {
 
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="cursor-pointer">
-              <a className="block py-2 pr-4 pl-3 text-white font-bold rounded-lg md:bg-transparent md:text-gray-300 dark:text-gray-300 md:dark:hover:text-white md:dark:hover:bg-purple-800 focus:bg-purple-800 md:p-2 md:dark:hover:p-2 dark:hover:text-purple-500 hover:bg-purple-800 focus:bg-purple-800 dark:hover:text-white dark:border-black">
+              <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
                 <div className="flex flex-row items-center">
-                  <div className="flex items-center mr-2 text-gray-300"></div>
+                  <div className="flex flex-row justify-center items-center text-gray-300"></div>
+                  <MdAccountCircle className="mr-2" />
                   SUA CONTA
                 </div>
               </a>
             </label>
             <ul
               tabIndex="0"
-              className="dropdown-content menu p-2 shadow bg-dark3 rounded-tr-none rounded-tl-lg rounded-b-lg w-52"
+              className="dropdown-content  p-2 shadow border-b-4 border-black bg-dark3 rounded-tr-none rounded-tl-lg rounded-b-lg w-52 text-gray-300"
             >
               <Link href="#">
                 <li className="flex flex-row items-center hover:text-roxo cursor-pointer p-2">
-                  <FaUser className="mr-3" />
-                  Meu perfil
+                  <p className="flex flex-row items-center justify-center">
+                    <FaUser className="mr-2" /> Meu perfil
+                  </p>
                 </li>
               </Link>
               <Link href="#">
                 <li className="flex flex-row items-center hover:text-roxo cursor-pointer p-2">
-                  <MdSettings className="mr-3" />
-                  Configurações
+                  <p className="flex flex-row items-center justify-center">
+                    <MdSettings className="mr-2" />
+                    Configurações
+                  </p>
                 </li>
               </Link>
-              <li className="flex flex-row items-center hover:text-red-500 cursor-pointer p-2">
-                <FaSignOutAlt className="mr-3" />
-                Sair
+              <li className="flex flex-row items-center hover:text-red-500 cursor-pointer p-2 ">
+                <p className="flex flex-row items-center justify-center">
+                  <FaSignOutAlt className="mr-2" />
+                  Sair
+                </p>
               </li>
             </ul>
           </div>
