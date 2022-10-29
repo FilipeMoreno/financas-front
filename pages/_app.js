@@ -3,6 +3,7 @@ import { ToastProvider } from 'react-toast-notifications'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import NProgress from 'nprogress'
+import { AnimateSharedLayout } from 'framer-motion'
 
 import '../styles/tailwind.css'
 import '../styles/globals.css'
@@ -10,9 +11,10 @@ import '../styles/nprogress.css'
 
 import Layout from '../components/Layout'
 
-import { AnimateSharedLayout } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+
+// import { AuthProvider } from '../context/AuthContext'
 
 const ViewportMetaLink = () => (
   <meta
@@ -44,10 +46,12 @@ function MyApp({ Component, pageProps }) {
       <AnimateSharedLayout>
         <Layout>
           <ToastProvider>
+            {/* <AuthProvider> */}
             <ViewportMetaLink />
             <Navbar />
             <Component {...pageProps} />
             <Footer />
+            {/* </AuthProvider> */}
           </ToastProvider>
         </Layout>
       </AnimateSharedLayout>

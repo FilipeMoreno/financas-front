@@ -3,7 +3,7 @@ import { AiOutlineArrowUp, AiOutlineFileSearch } from 'react-icons/ai'
 import { BsArrowUpSquare, BsFillArrowUpCircleFill } from 'react-icons/bs'
 import ReactModal from 'react-modal'
 
-export default function DetailsComponent() {
+export default function DetailsComponent({ dados }) {
   const [modalIsOpen1, setIsOpen1] = useState(false)
 
   const customStyles = {
@@ -61,19 +61,34 @@ export default function DetailsComponent() {
                   (+) Receitas
                 </h1>
                 <p className="text-[#7a7a7a] font-bold lg:text-base sm:text-sm">
-                  1 transação
+                  {dados.qtdReceitas} transação
                 </p>
               </div>
               <div>
-                <h1 className="font-bold lg:text-xl sm:text-md">R$ 320,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">
+                  {Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(dados.totalReceitas)}
+                </h1>
               </div>
             </div>
             <progress
               className="progress progress-success w-full bg-dark"
-              value="320"
-              max="561"
+              value={dados.totalReceitas}
+              max={dados.receitasMaisDespesas}
             ></progress>
-            <p className="text-xs text-[#7a7a7a]">R$ 320,00 de R$ 561,00</p>
+            <p className="text-xs text-[#7a7a7a]">
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(dados.totalReceitas)}{' '}
+              de{' '}
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(dados.receitasMaisDespesas)}
+            </p>
             <hr className="border-dark5 my-3" />
             <div className="flex flex-row justify-between">
               <div>
@@ -81,30 +96,51 @@ export default function DetailsComponent() {
                   (-) Despesas
                 </h1>
                 <p className="text-[#7a7a7a] font-bold lg:text-base sm:text-sm">
-                  1 transação
+                  {dados.qtdDespesas} transação
                 </p>
               </div>
               <div>
-                <h1 className="font-bold lg:text-xl sm:text-md">- R$ 100,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">
+                  -{' '}
+                  {Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(dados.totalDespesas)}
+                </h1>
               </div>
             </div>
             <progress
               className="progress progress-error w-full bg-dark"
-              value="100"
-              max="561"
+              value={dados.totalDespesas}
+              max={dados.receitasMaisDespesas}
             ></progress>
-            <p className="text-xs text-[#7a7a7a]">R$ 100,00 de R$ 561,00</p>
+            <p className="text-xs text-[#7a7a7a]">
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(dados.totalDespesas)}{' '}
+              de{' '}
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(dados.receitasMaisDespesas)}
+            </p>
 
             <hr className="border-dark5 my-3" />
             <div className="flex flex-row justify-between">
               <div>
                 <h1 className="font-bold lg:text-xl sm:text-md">(=) Total</h1>
                 <p className="text-[#7a7a7a] font-bold lg:text-base sm:text-sm">
-                  1 transação
+                  {dados.qtdReceitas + dados.qtdDespesas} transação
                 </p>
               </div>
               <div>
-                <h1 className="font-bold lg:text-xl sm:text-md">R$ 561,00</h1>
+                <h1 className="font-bold lg:text-xl sm:text-md">
+                  {Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(dados.receitasMaisDespesas)}
+                </h1>
               </div>
             </div>
             <hr className="border-dark5 my-3" />

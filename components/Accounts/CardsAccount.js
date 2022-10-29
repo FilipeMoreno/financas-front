@@ -2,7 +2,13 @@ import Image from 'next/image'
 import { FaPlus } from 'react-icons/fa'
 import { MdMoreVert } from 'react-icons/md'
 
-export default function CardsAccountsComponent({ name, icon_url, account }) {
+export default function CardsAccountsComponent({
+  name,
+  icon_url,
+  account,
+  saldo,
+  previsto
+}) {
   return (
     <>
       <div className="bg-dark3 border-b-4 border-black lg:w-[300px] sm:w-full h-[210px] rounded-xl mx-3 my-5 p-5">
@@ -44,11 +50,11 @@ export default function CardsAccountsComponent({ name, icon_url, account }) {
         <div className="flex flex-col mt-4">
           <div className="flex items-center justify-between my-1">
             <p className="text-white">Saldo atual</p>
-            <p className="font-medium text-lime-400">R$ 100,00</p>
+            <p className="font-medium text-lime-400">R$ {saldo}</p>
           </div>
           <div className="flex items-center justify-between my-1">
             <p className="text-white"> Saldo previsto</p>
-            <p className="font-medium text-lime-400">R$ 100,00</p>
+            <p className="font-medium text-lime-400">R$ {previsto}</p>
           </div>
         </div>
         <hr className="border-dark5 my-2" />

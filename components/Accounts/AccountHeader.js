@@ -68,10 +68,11 @@ export default function AccountHeaderComponent() {
         </div>
       </ReactModal>
       {/* <div className="flex lg:flex-row sm:flex-col items-center justify-between mt-3 mb-14"> */}
-      <div className="flex md:flex-row sm:flex-col bg-dark2 md:h-32 sm:h-48 rounded-b-3xl justify-around items-center mb-8">
+      <div className="flex flex-col bg-dark2 md:h-32 sm:h-48 rounded-b-3xl justify-around items-center mb-8">
         <h1 className="font-bold text-3xl text-white">Contas</h1>
         <div className="flex items-center justify-center border-2 border-roxo rounded-xl w-64 h-10 sm:my-5 lg:my-0">
-          <div onClick={openModal1}>
+          <div>
+            {/* <div onClick={openModal1}> */}
             <p className="flex flex-row items-center justify-center text-lg text-roxo cursor-pointer">
               {formatter.format(monthSelect)}
               <MdExpandMore className="ml-2" />

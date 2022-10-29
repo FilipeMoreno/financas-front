@@ -4,8 +4,20 @@ import CurrencyInput from 'react-currency-input-field'
 import ReactModal from 'react-modal'
 import Image from 'next/image'
 import api from '../../service/api'
+import { useForm } from 'react-hook-form'
+import { useToasts } from 'react-toast-notifications'
+import { Route } from 'react-router-dom'
+import Router from 'next/router'
 
 export default function NewAccountComponent({ types, banks }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+
+  const { addToast } = useToasts()
+
   const [modalIsOpen1, setIsOpen1] = useState(false)
   const [modalIsOpen2, setIsOpen2] = useState(false)
   const [modalIsOpen3, setIsOpen3] = useState(false)
@@ -14,6 +26,37 @@ export default function NewAccountComponent({ types, banks }) {
   async function handleSearchBank(ctx) {
     const getSearchResponse = await api.get(`/banks/get/search?name=${ctx}`)
     setSearchBank(getSearchResponse.data)
+  }
+
+  async function handleCreate({ name, balance }) {
+    try {
+      let res
+
+      if (selectedBank.id !== null || accountType.id !== null) {
+        res = await api.post('/accounts/create', {
+          name,
+          type: accountType.id,
+          bank: selectedBank.id,
+          balance,
+          color: selectedBank.color
+        })
+        if (res) {
+          addToast('Conta criada com sucesso!', {
+            appearance: 'success',
+            autoDismiss: true
+          })
+          Router.reload()
+        }
+      }
+    } catch (e) {
+      return addToast(
+        e.response?.data?.message + ' ' + e.response?.data?.details,
+        {
+          appearance: 'error',
+          autoDismiss: true
+        }
+      )
+    }
   }
 
   const [accountType, setAccountType] = useState({
@@ -97,75 +140,90 @@ export default function NewAccountComponent({ types, banks }) {
             </h1>
           </div>
           <hr className="border-dark5 my-3" />
-          <div className="my-4">
-            <div className="">
-              <CurrencyInput
-                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
-                id="initial-amount"
-                name="initial-amount"
-                placeholder="Saldo inicial"
-                prefix="R$ "
-                decimalSeparator=","
-                groupSeparator="."
-                decimalsLimit={2}
-                step={1}
-                intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
-                onValueChange={(value, name) => console.log(value, name)}
-                autoComplete={'off'}
-              />
-            </div>
-
-            <div className="">
-              <input
-                type="text"
-                id="account-name"
-                className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
-                placeholder="Nome da conta"
-                required
-              />
-            </div>
-
-            <div>
-              <h1 className="text-md">Instituição financeira</h1>
-              <div className="flex flex-row items-center border-0 border-b-2 border-gray-600">
-                <Image
-                  className="rounded-full"
-                  height={40}
-                  width={40}
-                  src={selectedBank.image}
+          <form onSubmit={handleSubmit(handleCreate)}>
+            <div className="my-4">
+              <div className="">
+                <input
+                  {...register('balance', { required: true })}
+                  type="number"
+                  id="initial-amount"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                  placeholder="Saldo inicial"
+                  required
                 />
-                <div
-                  onClick={openModal2}
-                  className="block cursor-pointer rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 appearance-none focus:border-roxo focus:outline-none focus:ring-0 peer"
-                >
-                  {selectedBank.name}
+                {/* <CurrencyInput
+                  {...register('balance')}
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                  id="initial-amount"
+                  name="initial-amount"
+                  placeholder="Saldo inicial"
+                  prefix="R$ "
+                  decimalSeparator=","
+                  groupSeparator="."
+                  decimalsLimit={2}
+                  step={1}
+                  intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
+                  onValueChange={(value, name) => console.log(value, name)}
+                  autoComplete={'off'}
+                /> */}
+              </div>
+
+              <div className="">
+                <input
+                  {...register('name', { required: true })}
+                  type="text"
+                  id="account-name"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
+                  placeholder="Nome da conta"
+                  required
+                />
+              </div>
+
+              <div>
+                <h1 className="text-md">Instituição financeira</h1>
+                <div className="flex flex-row items-center border-0 border-b-2 border-gray-600">
+                  <Image
+                    className="rounded-full"
+                    height={40}
+                    width={40}
+                    src={selectedBank.image}
+                  />
+                  <div
+                    onClick={openModal2}
+                    className="block cursor-pointer rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 appearance-none focus:border-roxo focus:outline-none focus:ring-0 peer"
+                  >
+                    {selectedBank.name}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div>
-              <h1 className="text-md">Tipo da conta</h1>
-              <div className="flex flex-row items-center border-0 border-b-2 border-gray-600">
-                <Image
-                  className="rounded-full"
-                  height={40}
-                  width={40}
-                  src={accountType.image}
-                />
-                <div
-                  onClick={openModal3}
-                  className="block cursor-pointer rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 appearance-none focus:border-roxo focus:outline-none focus:ring-0 peer"
-                >
-                  {accountType.name}
+              <div>
+                <h1 className="text-md">Tipo da conta</h1>
+                <div className="flex flex-row items-center border-0 border-b-2 border-gray-600">
+                  <Image
+                    className="rounded-full"
+                    height={40}
+                    width={40}
+                    src={accountType.image}
+                  />
+                  <div
+                    onClick={openModal3}
+                    className="block cursor-pointer rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark3 appearance-none focus:border-roxo focus:outline-none focus:ring-0 peer"
+                  >
+                    {accountType.name}
+                  </div>
                 </div>
               </div>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full bg-roxo text-white rounded-lg py-2 mt-8"
+                >
+                  Salvar
+                </button>
+              </div>
             </div>
-            <div>
-              <button className="w-full bg-roxo text-white rounded-lg py-2 mt-8">
-                Salvar
-              </button>
-            </div>
-          </div>
+          </form>
         </div>
       </ReactModal>
       <ReactModal
@@ -211,7 +269,9 @@ export default function NewAccountComponent({ types, banks }) {
                     onClick={() =>
                       handleBankSelection({
                         name: bank.name,
-                        image: bank.icon_url
+                        image: bank.icon_url,
+                        id: bank.id,
+                        color: bank.color
                       })
                     }
                     className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"
@@ -261,7 +321,8 @@ export default function NewAccountComponent({ types, banks }) {
                     onClick={() =>
                       handleAccountType({
                         name: type.name,
-                        image: type.icon_url
+                        image: type.icon_url,
+                        id: type.id
                       })
                     }
                     className="flex flex-row items-center p-2 hover:bg-dark4 rounded-lg cursor-pointer"

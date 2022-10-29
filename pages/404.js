@@ -7,9 +7,6 @@ import Link from 'next/link'
 
 import { BsArrowReturnLeft } from 'react-icons/bs'
 
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-
 export default function Custom404() {
   function handleReturnButton() {
     Router.back()

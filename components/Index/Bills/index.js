@@ -25,16 +25,31 @@ export default function BillsComponent({ type, hideValue }) {
               <p className="text-sm font-thin text-gray-300">Nubank</p>
             </div>
           </div>
-          <div className="flex flex-col justify-center mb-4">
-            {(!hideValue && (
-              <h1 className="font-bold lg:text-2xl sm:text-lg text-red-600">
-                - R$ 32,00
-              </h1>
-            )) || <h1 className="font-bold text-2xl text-red-600">🙈🙈🙈</h1>}
-            <p className="flex justify-end text-gray-300 text-sm">
-              01/JAN 00:00
-            </p>
-          </div>
+          {(type === 'pay' && (
+            <div className="flex flex-col justify-center mb-4">
+              {(!hideValue && (
+                <h1 className="font-bold lg:text-2xl sm:text-lg text-red-600">
+                  - R$ 32,00
+                </h1>
+              )) || <h1 className="font-bold text-2xl text-red-600">🙈🙈🙈</h1>}
+              <p className="flex justify-end text-gray-300 text-sm">
+                01/JAN 00:00
+              </p>
+            </div>
+          )) || (
+            <div className="flex flex-col justify-center mb-4">
+              {(!hideValue && (
+                <h1 className="font-bold lg:text-2xl sm:text-lg text-lime-600">
+                  R$ 32,00
+                </h1>
+              )) || (
+                <h1 className="font-bold text-2xl text-lime-600">🙈🙈🙈</h1>
+              )}
+              <p className="flex justify-end text-gray-300 text-sm">
+                01/JAN 00:00
+              </p>
+            </div>
+          )}
         </div>
         {/* <div className="flex flex-row items-center justify-between rounded-lg mx-4 my-4">
           <div className="flex items-center justify-center mb-4">

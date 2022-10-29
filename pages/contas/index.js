@@ -7,39 +7,42 @@ import NewAccountComponent from '../../components/Accounts/NewAccount'
 import api from '../../service/api'
 import { useEffect, useState } from 'react'
 
-export default function Accounts({ getAllBanks, getAccountsTypes }) {
+export default function Accounts({
+  getAllBanks,
+  getAccountsTypes,
+  dashboard,
+  getAccounts
+}) {
   const [accountsTypes, setAccoutsType] = useState()
 
   return (
     <>
-      <title>Contas | Finanças</title>
+      <title>Contas | No Controle</title>
       <div className="bg-dark">
         <div>
           <AccountHeaderComponent />
-          <CardBalanceComponent />
+          <CardBalanceComponent
+            saldo={dashboard.saldo}
+            previsto={dashboard.saldo_previsto}
+          />
         </div>
         <div className="flex flex-row flex-wrap items-center p-4">
           <NewAccountComponent banks={getAllBanks} types={getAccountsTypes} />
 
-          <CardsAccountsComponent
-            name={'Carteira'}
-            icon_url={
-              'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/carteira.png'
-            }
-          />
-          <CardsAccountsComponent
-            name={'Nubank'}
-            icon_url={
-              'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/nubank.png'
-            }
-          />
-
-          <CardsAccountsComponent
-            name={'Banco do Brasil'}
-            icon_url={
-              'https://raw.githubusercontent.com/FilipeMoreno/financas-front/images/bancos/bb.png'
-            }
-          />
+          {getAccounts?.map(account => {
+            return (
+              <CardsAccountsComponent
+                name={account.name}
+                icon_url={
+                  account.bank.icon_url
+                    ? account.bank.icon_url
+                    : account.type.icon_url
+                }
+                saldo={account.balance}
+                previsto={'-'}
+              />
+            )
+          })}
         </div>
       </div>
     </>
@@ -65,6 +68,16 @@ export const getServerSideProps = async ctx => {
       console.log('Ocorreu um erro ao acessar a API de getAllBanks', e)
     })
 
+  const dashboard = await api
+    .get('/dashboard/get')
+    .then(res => res.data)
+    .catch(error => console.log(error))
+
+  const getAccounts = await api
+    .get('/accounts/get/all')
+    .then(res => res.data)
+    .catch(error => console.log(error))
+
   // if (!token) {
   //   return {
   //     redirect: {
@@ -75,6 +88,6 @@ export const getServerSideProps = async ctx => {
   // }
 
   return {
-    props: { getAllBanks, getAccountsTypes }
+    props: { getAllBanks, getAccountsTypes, dashboard, getAccounts }
   }
 }

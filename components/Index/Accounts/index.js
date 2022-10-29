@@ -10,7 +10,10 @@ export default function AccountsComponent({ hideValue, accounts }) {
           return (
             <div className="flex flex-row items-center justify-between rounded-lg mx-4 mb-4">
               <div className="flex items-center justify-center">
-                <div className="flex items-center justify-center rounded-full bg-[#820AD1] w-[50px] h-[50px] mr-4">
+                <div
+                  style={{ backgroundColor: account.bank.color }}
+                  className="flex items-center justify-center rounded-full w-[50px] h-[50px] mr-4"
+                >
                   <Image
                     className="rounded-full"
                     alt={`Logo do ${account.bank.name}`}

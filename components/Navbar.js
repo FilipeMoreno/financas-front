@@ -6,8 +6,9 @@ import {
   BsFillGrid1X2Fill,
   BsFillPieChartFill
 } from 'react-icons/bs'
-import { FaPercentage, FaSignOutAlt, FaUser } from 'react-icons/fa'
-import { MdAccountCircle, MdSettings, MdShowChart } from 'react-icons/md'
+import { FaPercentage } from 'react-icons/fa'
+import { MdShowChart } from 'react-icons/md'
+import { BiCategory } from 'react-icons/bi'
 
 function NavLink({ to, children, active }) {
   return (
@@ -29,7 +30,7 @@ function MobileNav({ open, setOpen }) {
       <div className="flex items-center justify-center filter bg-dark2 h-20">
         {/*logo container*/}
         <a className="text-xl font-semibold" href="/">
-          <img height={80} width={80} src={'/logo.png'} />
+          <img height={120} width={120} src={'/logo.png'} />
         </a>
       </div>
       <div className="flex flex-col ml-4">
@@ -69,7 +70,7 @@ function MobileNav({ open, setOpen }) {
           <BsBank2 className="mr-2" />
           CONTAS
         </a>
-        <a
+        {/*<a
           className="flex flex-row items-center text-xl my-4 font-bold text-gray-300"
           href="/cartoes"
           onClick={() =>
@@ -80,7 +81,7 @@ function MobileNav({ open, setOpen }) {
         >
           <BsCreditCardFill className="mr-2" />
           CARTÕES
-        </a>
+        </a>*/}
         <a
           className="flex flex-row items-center text-xl my-4 font-bold text-gray-300"
           href="/relatorios"
@@ -105,7 +106,19 @@ function MobileNav({ open, setOpen }) {
           <FaPercentage className="mr-2" />
           ORÇAMENTOS
         </a>
-        <div className="dropdown dropdown-content">
+        <a
+          className="flex flex-row items-center text-xl my-4 font-bold text-gray-300"
+          href="/categorias"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open)
+            }, 100)
+          }
+        >
+          <FaPercentage className="mr-2" />
+          CATEGORIAS
+        </a>
+        {/* <div className="dropdown dropdown-content">
           <label tabIndex="0" className="cursor-pointer text-xl">
             <a className="block my-2 font-bold text-gray-300">
               <div className="flex flex-row items-center">
@@ -141,7 +154,7 @@ function MobileNav({ open, setOpen }) {
               </p>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   )
@@ -154,7 +167,7 @@ export default function Navbar() {
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-3/12 flex items-center">
         <a className="text-2xl font-semibold" href="/">
-          <img height={80} width={80} src={'/logo.png'} />
+          <img height={120} width={200} src={'/logo.png'} />
         </a>
       </div>
       <div className="w-9/12 flex justify-end items-center">
@@ -195,10 +208,10 @@ export default function Navbar() {
             <BsBank2 className="mr-2" />
             CONTAS
           </NavLink>
-          <NavLink to="/cartoes">
+          {/*<NavLink to="/cartoes">
             <BsCreditCardFill className="mr-2" />
             CARTÕES
-          </NavLink>
+          </NavLink>*/}
           <NavLink to="/relatorios">
             <BsFillPieChartFill className="mr-2" />
             RELATÓRIOS
@@ -207,8 +220,12 @@ export default function Navbar() {
             <FaPercentage className="mr-2" />
             ORÇAMENTOS
           </NavLink>
+          <NavLink to="/categorias">
+            <BiCategory className="mr-2" />
+            CATEGORIAS
+          </NavLink>
         </div>
-        <div className="sm:hidden md:flex dropdown dropdown-end">
+        {/* <div className="sm:hidden md:flex dropdown dropdown-end">
           <label tabIndex="0" className="cursor-pointer">
             <a className="block lg:py-2 sm:p-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white">
               <div className="flex flex-row items-center">
@@ -244,7 +261,7 @@ export default function Navbar() {
               </p>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </nav>
   )

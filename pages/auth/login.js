@@ -1,21 +1,50 @@
-import { useState } from 'react'
+import { parseCookies } from 'nookies'
+import { useContext, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa'
+import { useToasts } from 'react-toast-notifications'
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Login() {
   const [isVisible, setIsVisible] = useState(false)
+  const { signIn } = useContext(AuthContext)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+
+  const { addToast } = useToasts()
+
+  async function handleSignIn(data) {
+    addToast('Autenticando...', {
+      appearance: 'info',
+      autoDismiss: true
+    })
+
+    await signIn(data)
+  }
 
   return (
     <>
       <title>Login</title>
       <div className="flex items-center justify-center h-screen w-full">
         <div>
-          <form className="bg-dark2 border-b-4 border-black border-opacity-60 shadow-md rounded-lg px-12 py-8 w-[500px]">
+          <form
+            onSubmit={handleSubmit(handleSignIn)}
+            className="bg-dark2 border-b-4 border-black border-opacity-60 shadow-md rounded-lg px-12 py-8 w-[500px]"
+          >
             <div className="m-4">
               <h1 className="text-4xl font-bold">Entrar</h1>
               <p className="">Acesse sua conta para continuar...</p>
             </div>
             <div className="relative mb-6">
               <input
+                {...register('email', {
+                  required: true,
+                  pattern: /^\S+@\S+$/i
+                })}
                 type="email"
                 id="email"
                 className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
@@ -39,6 +68,9 @@ export default function Login() {
             </div>
             <div className="relative my-6">
               <input
+                {...register('password', {
+                  required: true
+                })}
                 type={isVisible ? 'text' : 'password'}
                 id="password"
                 className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-400 bg-dark border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 focus:border-roxo focus:outline-none focus:ring-0 peer"
@@ -90,4 +122,20 @@ export default function Login() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps = async ctx => {
+  const { 'financas.token': token } = await parseCookies(ctx)
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
 }

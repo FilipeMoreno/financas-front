@@ -24,7 +24,7 @@ export default function Home({ dashboard }) {
 
   return (
     <>
-      <title>Finanças</title>
+      <title>Dashboard | No Controle</title>
       <div>
         <div className="flex md:flex-row sm:flex-col bg-dark2 md:h-32 sm:h-48 rounded-b-3xl justify-around items-center mb-8">
           <div className="flex flex-col justify-center mx-2">
@@ -44,12 +44,16 @@ export default function Home({ dashboard }) {
                 }).format(dashboard.saldo)}
               </h1>
             )) || <h1 className="font-bold text-4xl">🙈🙈🙈</h1>}
-            <DetailsComponent />
+            <DetailsComponent dados={dashboard} />
           </div>
           <div>
-            <NewTransactionComponent />
+            <NewTransactionComponent
+              categorias={dashboard.categorias}
+              contas={dashboard.contas}
+            />
           </div>
         </div>
+
         <div className="grid overflow-hidden md:grid-cols-2 sm:grid-cols-1 grid-rows-4 gap-y-8 gap-x-12 grid-flow-row md:mx-12 sm:mx-6">
           <div className="box">
             <AccountsComponent
@@ -57,17 +61,26 @@ export default function Home({ dashboard }) {
               hideValue={hideValue}
             />
           </div>
-          <div className="box row-span-2">
-            <BillsToReceiverComponent hideValue={hideValue} />
+          <div className="box row-span-1">
+            <BillsToPayComponent
+              expenses={dashboard.despesas_pendentes}
+              hideValue={hideValue}
+            />
           </div>
-          <div className="box">
+          {/* <div className="box">
             <CardComponent />
-          </div>
+          </div> */}
           <div className="box">
-            <TransactionsComponent hideValue={hideValue} />
+            <TransactionsComponent
+              hideValue={hideValue}
+              transactions={dashboard.ultimasTransacoes}
+            />
           </div>
-          <div className="box row-span-2">
-            <BillsToPayComponent hideValue={hideValue} />
+          <div className="box row-span-1">
+            <BillsToReceiverComponent
+              hideValue={hideValue}
+              income={dashboard.receitas_pendentes}
+            />
           </div>
         </div>
       </div>
@@ -76,16 +89,16 @@ export default function Home({ dashboard }) {
 }
 
 export async function getServerSideProps(ctx) {
-  // const { ['finances.token']: token } = parseCookies(ctx)
+  const { 'financas.token': token } = await parseCookies(ctx)
 
-  // if (!token) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //       permanent: false
-  //     }
-  //   }
-  // }
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false
+      }
+    }
+  }
 
   const dashboard = await api
     .get('/dashboard/get')
