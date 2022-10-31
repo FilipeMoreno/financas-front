@@ -26,23 +26,73 @@ export default function CategoriasIndex({ categorias }) {
       </div>
       <div className="flex flex-col justify-center rounded-lg lg:mx-96 sm:mx-4 my-6">
         <NovaCategoriaComponent />
+
         {categorias.map(categoria => {
           return (
-            <div className="flex flex-row items-center justify-between p-2 px-12 bg-dark3 border-b-4 border-black rounded-lg mt-2">
-              <div className="mx-3">
-                <Image height={64} width={64} src={categoria.icon_url} />
+            <>
+              <div
+                tabIndex={0}
+                className="collapse collapse-arrow border-b-4 border-black bg-dark3 rounded-lg my-1"
+              >
+                <div className="collapse-title text-xl font-medium">
+                  <div className="flex flex-row items-center justify-between ">
+                    <div className="mx-3">
+                      <Image height={64} width={64} src={categoria.icon_url} />
+                    </div>
+                    <div>
+                      <h1 className="text-xl">{categoria.name}</h1>
+                    </div>
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="-mt-2">Cor</p>
+                      <div
+                        className="rounded-full w-6 h-6 bg-red-500"
+                        style={{ background: categoria.color }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="collapse-content">
+                  {categoria.subcategorias.map(subcategoria => {
+                    return (
+                      <div className="flex flex-row items-center justify-between mx-2">
+                        <div className="mx-3">
+                          <Image
+                            height={64}
+                            width={64}
+                            src={subcategoria.icon_url}
+                          />
+                        </div>
+                        <div>
+                          <h1 className="text-xl">{subcategoria.name}</h1>
+                        </div>
+                        <div className="flex flex-col items-center justify-center">
+                          <p className="-mt-2 mx-5">Cor</p>
+                          <div
+                            className="rounded-full w-6 h-6 bg-red-500"
+                            style={{ background: subcategoria.color }}
+                          />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
-              <div>
-                <h1 className="text-xl">{categoria.name}</h1>
-              </div>
-              <div className="flex flex-col items-center justify-center">
-                <p className="-mt-2">Cor</p>
-                <div
-                  className="rounded-full w-6 h-6 bg-red-500"
-                  style={{ background: categoria.color }}
-                />
-              </div>
-            </div>
+              {/* <div className="flex flex-row items-center justify-between p-2 px-12 bg-dark3 border-b-4 border-black rounded-lg mt-2">
+                <div className="mx-3">
+                  <Image height={64} width={64} src={categoria.icon_url} />
+                </div>
+                <div>
+                  <h1 className="text-xl">{categoria.name}</h1>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <p className="-mt-2">Cor</p>
+                  <div
+                    className="rounded-full w-6 h-6 bg-red-500"
+                    style={{ background: categoria.color }}
+                  />
+                </div>
+              </div> */}
+            </>
           )
         })}
       </div>

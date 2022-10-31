@@ -5,16 +5,39 @@ import {
   FaRegTrashAlt
 } from 'react-icons/fa'
 
-import { BsCheck2Circle } from 'react-icons/bs'
+import { BsCheck2Circle, BsCalendarCheckFill } from 'react-icons/bs'
+
 import { useEffect, useState } from 'react'
 import api from '../../service/api'
+import { useToasts } from 'react-toast-notifications'
+import Router from 'next/router'
+import Image from 'next/image'
+import CardBalanceComponent from '../../components/Accounts/CardBalance'
 
-export default function TransacoesIndex({ transactions }) {
+export default function TransacoesIndex({ transactions, dashboard }) {
   const formatter = new Intl.DateTimeFormat('pr-BR', {
     month: 'long',
     year: 'numeric'
   })
+
   const [monthSelect, setMonthSelect] = useState(new Date())
+  const { addToast } = useToasts()
+
+  async function handleEfetivar(id) {
+    addToast('Carregando...', {
+      appearance: 'info',
+      autoDismiss: true
+    })
+    const res = await api.put(`/transacoes/efetivar/${id}`)
+
+    if (res) {
+      addToast('Transação efetivada com sucesso!', {
+        appearance: 'success',
+        autoDismiss: true
+      })
+      Router.reload()
+    }
+  }
 
   return (
     <>
@@ -31,6 +54,10 @@ export default function TransacoesIndex({ transactions }) {
         </div>
         <p></p>
       </div>
+      <CardBalanceComponent
+        saldo={dashboard.saldo}
+        previsto={dashboard.saldo_previsto}
+      />
       <div className="mx-12 my-4">
         <table className="table-auto w-full bg-dark3 rounded-lg">
           <thead className="bg-dark4 h-12">
@@ -47,13 +74,17 @@ export default function TransacoesIndex({ transactions }) {
           <tbody>
             {transactions.map(transaction => {
               return (
-                <tr>
+                <tr key={transaction.id}>
                   <td className="flex items-center justify-center my-2">
                     {transaction.efetivada === true && (
-                      <FaCheckCircle className="text-lime-500 text-bold text-2xl" />
+                      <div className="tooltip" data-tip="Efetivada">
+                        <FaCheckCircle className=" text-lime-500 text-bold text-2xl" />
+                      </div>
                     )}
                     {transaction.efetivada === false && (
-                      <FaInfoCircle className="text-red-500 text-bold text-2xl" />
+                      <div className="tooltip" data-tip="Pendente">
+                        <FaInfoCircle className="text-red-500 text-bold text-2xl" />
+                      </div>
                     )}
                   </td>
                   <td>
@@ -62,17 +93,66 @@ export default function TransacoesIndex({ transactions }) {
                     )}
                   </td>
                   <td>{transaction.descricao}</td>
-                  <td>{transaction.categoria.name}</td>
-                  <td>Conta</td>
                   <td>
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL'
-                    }).format(transaction.valor)}
+                    <div className="flex flex-row items-center">
+                      <Image
+                        className="rounded-full"
+                        height={32}
+                        width={32}
+                        blurDataURL={transaction.categoria.icon_url}
+                        src={transaction.categoria.icon_url}
+                      />
+                      <p className="ml-2">{transaction.categoria.name}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex flex-row items-center">
+                      <Image
+                        className="rounded-full"
+                        height={32}
+                        width={32}
+                        blurDataURL={transaction.conta.bank.icon_url}
+                        src={transaction.conta.bank.icon_url}
+                      />
+                      <p className="ml-2">{transaction.conta.name}</p>
+                    </div>
+                  </td>
+                  <td>
+                    {transaction.tipo === 'DESPESA' && (
+                      <p className="text-red-500">
+                        -{' '}
+                        {Intl.NumberFormat('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL'
+                        }).format(transaction.valor)}
+                      </p>
+                    )}
+                    {transaction.tipo === 'RECEITA' && (
+                      <p className="text-lime-500">
+                        {Intl.NumberFormat('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL'
+                        }).format(transaction.valor)}
+                      </p>
+                    )}
                   </td>
                   <td className="flex flex-row items-center justify-center">
-                    <FaEdit className="mx-1" />
-                    <FaRegTrashAlt className="mx-1" />
+                    {!transaction.efetivada && (
+                      <button
+                        className="flex flex-row items-center"
+                        onClick={() => handleEfetivar(transaction.id)}
+                      >
+                        <div className="tooltip" data-tip="Efetivar">
+                          <BsCalendarCheckFill className="mx-1 text-lime-500" />
+                        </div>
+                      </button>
+                    )}
+                    <div className="tooltip" data-tip="Editar">
+                      <FaEdit className="mx-1" />
+                    </div>
+                    <div className="tooltip" data-tip="Excluir">
+                      <FaRegTrashAlt className="mx-1" />
+                    </div>
                   </td>
                 </tr>
               )
@@ -90,7 +170,12 @@ export async function getServerSideProps(ctx) {
     .then(res => res.data)
     .catch(error => console.log(error))
 
+  const dashboard = await api
+    .get('/dashboard/get')
+    .then(res => res.data)
+    .catch(error => console.log(error))
+
   return {
-    props: { transactions }
+    props: { transactions, dashboard }
   }
 }

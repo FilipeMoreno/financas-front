@@ -3,11 +3,13 @@ import { Doughnut } from 'react-chartjs-2'
 import { ArcElement } from 'chart.js'
 import Chart from 'chart.js/auto'
 import { useState } from 'react'
+import CardBalanceComponent from '../../components/Accounts/CardBalance'
 
 export default function RelatoriosIndex({
   receitasPorCategorias,
   despesasPorCategorias,
-  transacoes
+  transacoes,
+  dashboard
 }) {
   const formatter = new Intl.DateTimeFormat('pr-BR', {
     month: 'long',
@@ -68,20 +70,20 @@ export default function RelatoriosIndex({
       {
         data: receitasCategorias,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(177, 237, 12, 0.5)',
+          'rgba(12, 247, 62, 0.5)',
+          'rgba(0, 221, 224, 0.5)',
+          'rgba(12, 67, 247, 0.5)',
+          'rgba(153, 102, 255, 0.5)',
+          'rgba(130, 0, 245, 0.5)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
+          'rgba(177, 237, 12, 1)',
+          'rgba(12, 247, 62, 1)',
+          'rgba(0, 221, 224, 1)',
+          'rgba(12, 67, 247, 1)',
           'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(130, 0, 245, 1)'
         ],
         borderWidth: 1
       }
@@ -94,20 +96,20 @@ export default function RelatoriosIndex({
       {
         data: DespesasCategorias,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(250, 248, 72, 0.5)',
+          'rgba(247, 189, 12, 0.5)',
+          'rgba(224, 127, 0, 0.5)',
+          'rgba(250, 96, 27, 0.5)',
+          'rgba(224, 15, 1, 0.5)',
+          'rgba(245, 0, 28, 0.5)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(245, 227, 0, 1)',
+          'rgba(247, 189, 12, 1)',
+          'rgba(224, 127, 0, 1)',
+          'rgba(250, 96, 27, 1)',
+          'rgba(224, 15, 1, 1)',
+          'rgba(245, 0, 28, 1)'
         ],
         borderWidth: 1
       }
@@ -129,6 +131,10 @@ export default function RelatoriosIndex({
         </div>
         <p></p>
       </div>
+      <CardBalanceComponent
+        saldo={dashboard.saldo}
+        previsto={dashboard.saldo_previsto}
+      />
       <div className="flex flex-wrap justify-center">
         <div className="bg-dark3 border-b-4 border-black rounded-xl mx-3 my-5 p-5 w-[600px]">
           <p>Despesas por categoria</p>
@@ -165,7 +171,17 @@ export async function getServerSideProps(ctx) {
     .then(res => res.data)
     .catch(error => console.log(error))
 
+  const dashboard = await api
+    .get('/dashboard/get')
+    .then(res => res.data)
+    .catch(error => console.log(error))
+
   return {
-    props: { receitasPorCategorias, despesasPorCategorias, transacoes }
+    props: {
+      receitasPorCategorias,
+      despesasPorCategorias,
+      transacoes,
+      dashboard
+    }
   }
 }
