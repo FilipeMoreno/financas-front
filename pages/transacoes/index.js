@@ -39,6 +39,22 @@ export default function TransacoesIndex({ transactions, dashboard }) {
     }
   }
 
+  async function handleDeletar(id) {
+    addToast('Carregando...', {
+      appearance: 'info',
+      autoDismiss: true
+    })
+    const res = await api.delete(`/transacoes/remover/${id}`)
+
+    if (res) {
+      addToast('Transação removida com sucesso!', {
+        appearance: 'success',
+        autoDismiss: true
+      })
+      Router.reload()
+    }
+  }
+
   return (
     <>
       <title>Transações | No Controle</title>
@@ -74,87 +90,130 @@ export default function TransacoesIndex({ transactions, dashboard }) {
           <tbody>
             {transactions.map(transaction => {
               return (
-                <tr key={transaction.id}>
-                  <td className="flex items-center justify-center my-2">
-                    {transaction.efetivada === true && (
-                      <div className="tooltip" data-tip="Efetivada">
-                        <FaCheckCircle className=" text-lime-500 text-bold text-2xl" />
-                      </div>
-                    )}
-                    {transaction.efetivada === false && (
-                      <div className="tooltip" data-tip="Pendente">
-                        <FaInfoCircle className="text-red-500 text-bold text-2xl" />
-                      </div>
-                    )}
-                  </td>
-                  <td>
-                    {Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(
-                      new Date(transaction.data)
-                    )}
-                  </td>
-                  <td>{transaction.descricao}</td>
-                  <td>
-                    <div className="flex flex-row items-center">
-                      <Image
-                        className="rounded-full"
-                        height={32}
-                        width={32}
-                        blurDataURL={transaction.categoria.icon_url}
-                        src={transaction.categoria.icon_url}
-                      />
-                      <p className="ml-2">{transaction.categoria.name}</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex flex-row items-center">
-                      <Image
-                        className="rounded-full"
-                        height={32}
-                        width={32}
-                        blurDataURL={transaction.conta.bank.icon_url}
-                        src={transaction.conta.bank.icon_url}
-                      />
-                      <p className="ml-2">{transaction.conta.name}</p>
-                    </div>
-                  </td>
-                  <td>
-                    {transaction.tipo === 'DESPESA' && (
-                      <p className="text-red-500">
-                        -{' '}
-                        {Intl.NumberFormat('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL'
-                        }).format(transaction.valor)}
-                      </p>
-                    )}
-                    {transaction.tipo === 'RECEITA' && (
-                      <p className="text-lime-500">
-                        {Intl.NumberFormat('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL'
-                        }).format(transaction.valor)}
-                      </p>
-                    )}
-                  </td>
-                  <td className="flex flex-row items-center justify-center">
-                    {!transaction.efetivada && (
-                      <button
-                        className="flex flex-row items-center"
-                        onClick={() => handleEfetivar(transaction.id)}
-                      >
-                        <div className="tooltip" data-tip="Efetivar">
-                          <BsCalendarCheckFill className="mx-1 text-lime-500" />
+                <>
+                  <tr key={transaction.id}>
+                    <td className="flex items-center justify-center my-2">
+                      {transaction.efetivada === true && (
+                        <div className="tooltip" data-tip="Efetivada">
+                          <FaCheckCircle className=" text-lime-500 text-bold text-2xl" />
                         </div>
-                      </button>
-                    )}
-                    <div className="tooltip" data-tip="Editar">
-                      <FaEdit className="mx-1" />
-                    </div>
-                    <div className="tooltip" data-tip="Excluir">
-                      <FaRegTrashAlt className="mx-1" />
-                    </div>
-                  </td>
-                </tr>
+                      )}
+                      {transaction.efetivada === false && (
+                        <div className="tooltip" data-tip="Pendente">
+                          <FaInfoCircle className="text-red-500 text-bold text-2xl" />
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      {Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(
+                        new Date(transaction.data)
+                      )}
+                    </td>
+                    <td>{transaction.descricao}</td>
+                    <td>
+                      <div className="flex flex-row items-center">
+                        <Image
+                          className="rounded-full"
+                          height={32}
+                          width={32}
+                          blurDataURL={transaction.categoria.icon_url}
+                          src={transaction.categoria.icon_url}
+                        />
+                        <p className="ml-2">{transaction.categoria.name}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex flex-row items-center">
+                        <Image
+                          className="rounded-full"
+                          height={32}
+                          width={32}
+                          blurDataURL={transaction.conta.bank.icon_url}
+                          src={transaction.conta.bank.icon_url}
+                        />
+                        <p className="ml-2">{transaction.conta.name}</p>
+                      </div>
+                    </td>
+                    <td>
+                      {transaction.tipo === 'DESPESA' && (
+                        <p className="text-red-500 font-bold">
+                          -{' '}
+                          {Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                          }).format(transaction.valor)}
+                        </p>
+                      )}
+                      {transaction.tipo === 'RECEITA' && (
+                        <p className="text-lime-500 font-bold">
+                          {Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                          }).format(transaction.valor)}
+                        </p>
+                      )}
+                    </td>
+                    <td className="flex flex-row items-center justify-center">
+                      {!transaction.efetivada && (
+                        <button
+                          className="flex flex-row items-center"
+                          onClick={() => handleEfetivar(transaction.id)}
+                        >
+                          <div className="tooltip" data-tip="Efetivar">
+                            <BsCalendarCheckFill className="mx-1 text-lime-500" />
+                          </div>
+                        </button>
+                      )}
+                      <div className="tooltip" data-tip="Editar">
+                        <FaEdit className="mx-1" />
+                      </div>
+                      <div
+                        onClick={() => handleDeletar(transaction.id)}
+                        className="tooltip"
+                        data-tip="Excluir"
+                      >
+                        <FaRegTrashAlt className="mx-1" />
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr className="bg-dark4">
+                    <th colSpan={3}>
+                      <div className="flex flex-col items-center">
+                        <h1>Saldo anterior:</h1>
+                        {transaction.efetivada && (
+                          <p>
+                            {Intl.NumberFormat('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL'
+                            }).format(
+                              transaction.anteriorxnovo?.saldo_anterior
+                            )}
+                          </p>
+                        )}
+                        {!transaction.efetivada && (
+                          <p className="text-red-500">Não efetivada</p>
+                        )}
+                      </div>
+                    </th>
+                    <th colSpan={4}>
+                      <div className="flex flex-col items-center">
+                        <h1>Novo saldo:</h1>
+                        {transaction.efetivada && (
+                          <p>
+                            {Intl.NumberFormat('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL'
+                            }).format(transaction.anteriorxnovo?.novo_saldo)}
+                          </p>
+                        )}
+                        {!transaction.efetivada && (
+                          <p className="text-red-500">Não efetivada</p>
+                        )}
+                      </div>
+                    </th>
+                  </tr>
+                </>
               )
             })}
           </tbody>

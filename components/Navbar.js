@@ -12,13 +12,17 @@ import { BiCategory } from 'react-icons/bi'
 
 function NavLink({ to, children, active }) {
   return (
-    <Link href={to}>
-      <a className="flex flex-row items-center justify-center mx-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white p-2">
-        {children}
-      </a>
-    </Link>
+    <motion.div whileHover={{ scale: 1.1 }}>
+      <Link href={to}>
+        <a className="flex flex-row items-center justify-center mx-2 font-bold text-gray-300 rounded-lg hover:bg-purple-800 focus:bg-purple-800 hover:text-white p-2">
+          {children}
+        </a>
+      </Link>
+    </motion.div>
   )
 }
+
+import { motion } from 'framer-motion'
 
 function MobileNav({ open, setOpen }) {
   return (
@@ -167,7 +171,9 @@ export default function Navbar() {
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-3/12 flex items-center">
         <a className="text-2xl font-semibold" href="/">
-          <img height={120} width={200} src={'/logo.png'} />
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <img height={120} width={200} src={'/logo.png'} />
+          </motion.div>
         </a>
       </div>
       <div className="w-9/12 flex justify-end items-center">
@@ -200,10 +206,12 @@ export default function Navbar() {
             <BsFillGrid1X2Fill className="mr-2" />
             RESUMO
           </NavLink>
+
           <NavLink to="/transacoes">
             <MdShowChart className="mr-2" />
             LANÇAMENTOS
           </NavLink>
+
           <NavLink to="/contas">
             <BsBank2 className="mr-2" />
             CONTAS

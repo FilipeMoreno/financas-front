@@ -31,12 +31,23 @@ export default function AccountsComponent({ hideValue, accounts }) {
                 </div>
               </div>
               {(!hideValue && (
-                <h1>
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                  }).format(account.balance)}
-                </h1>
+                <>
+                  {(account.balance >= 0 && (
+                    <h1 className="text-lime-500 font-bold">
+                      {Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }).format(account.balance)}
+                    </h1>
+                  )) || (
+                    <h1 className="text-red-500 font-bold">
+                      {Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }).format(account.balance)}
+                    </h1>
+                  )}
+                </>
               )) || <h1>🙈🙈🙈</h1>}
             </div>
           )
